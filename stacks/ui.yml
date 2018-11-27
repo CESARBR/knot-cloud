@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  authenticator:
+    image: cesarbr/knot-cloud-authenticator
+    env_file: './env.d/knot-cloud-authenticator.env'
+  ui:
+    image: cesarbr/knot-cloud-ui
+    env_file: './env.d/knot-cloud-ui.env'
+    ports:
+      - '80:80'

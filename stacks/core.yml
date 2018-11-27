@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  dispatcher:
+    image: octoblu/meshblu-core-dispatcher
+    env_file: './env.d/meshblu-core-dispatcher.env'
+  worker-webhook:
+    image: octoblu/meshblu-core-worker-webhook
+    env_file: './env.d/meshblu-core-worker-webhook.env'
+  protocol-adapter-http:
+    image: octoblu/meshblu-core-protocol-adapter-http
+    env_file: './env.d/meshblu-core-protocol-adapter-http.env'
+  mongo:
+    image: mongo
+    volumes:
+      - 'mongo-data:/data/db'
+  redis:
+    image: redis
+
+volumes:
+  mongo-data:

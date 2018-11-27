@@ -1,0 +1,7 @@
+version: '3.7'
+services:
+  bootstrap:
+    image: cesarbr/knot-cloud-bootstrap
+    env_file: './env.d/knot-cloud-bootstrap.env'
+    ports:
+      - '80:80'
