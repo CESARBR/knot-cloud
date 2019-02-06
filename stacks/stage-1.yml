@@ -10,6 +10,16 @@ services:
   protocol-adapter-http:
     image: octoblu/meshblu-core-protocol-adapter-http
     env_file: './env.d/meshblu-core-protocol-adapter-http.env'
+  uuid-alias-service:
+    image: cesarbr/uuid-alias-service
+    env_file: './env.d/uuid-alias-service.env'
+  uuid-alias-lookup-service:
+    image: cesarbr/uuid-alias-lookup-service
+    env_file: './env.d/uuid-alias-lookup-service.env'
+  # KNoT Cloud
+  protocol-adapter-websocket:
+    image: cesarbr/knot-cloud-protocol-adapter-websocket
+    env_file: './env.d/knot-cloud-protocol-adapter-websocket.env'
   # Storage
   mongo:
     image: mongo
