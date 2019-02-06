@@ -1,5 +1,6 @@
 version: '3.7'
 services:
+  # Meshblu
   dispatcher:
     image: octoblu/meshblu-core-dispatcher
     env_file: './env.d/meshblu-core-dispatcher.env'
@@ -9,6 +10,7 @@ services:
   protocol-adapter-http:
     image: octoblu/meshblu-core-protocol-adapter-http
     env_file: './env.d/meshblu-core-protocol-adapter-http.env'
+  # Storage
   mongo:
     image: mongo
     volumes:
