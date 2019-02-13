@@ -20,6 +20,11 @@ services:
   protocol-adapter-websocket:
     image: cesarbr/knot-cloud-protocol-adapter-websocket
     env_file: './env.d/knot-cloud-protocol-adapter-websocket.env'
+    deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.frontend.rule=HostRegexp:ws,ws.{domain:[a-zA-Z0-9.]+}
+        - traefik.port=80
   # Storage
   mongo:
     image: mongo
@@ -27,6 +32,19 @@ services:
       - 'mongo-data:/data/db'
   redis:
     image: redis
+  # Proxy
+  traefik:
+    image: traefik
+    command: >
+      traefik
+        --docker
+        --docker.watch
+        --docker.swarmMode
+        --docker.exposedByDefault=false
+    ports:
+      - '80:80'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
 volumes:
   mongo-data:

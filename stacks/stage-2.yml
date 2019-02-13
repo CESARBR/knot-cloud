@@ -6,5 +6,8 @@ services:
   ui:
     image: cesarbr/knot-cloud-ui
     env_file: './env.d/knot-cloud-ui.env'
-    ports:
-      - '80:80'
+    deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.frontend.rule=HostRegexp:{domain:[a-zA-Z0-9.]+},www.{domain:[a-zA-Z0-9.]+}
+        - traefik.port=80

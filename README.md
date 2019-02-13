@@ -2,6 +2,10 @@
 
 KNoT Cloud Docker stack.
 
+## Local deployment considerations
+
+This stack uses [Traefik](https://traefik.io) as a reverse proxy for the services in the stack. If you are running this stack locally, might want to configure a test domain in your machine before proceeding.
+
 ## Stage 1
 
 ### Configure
@@ -53,7 +57,7 @@ docker stack deploy -c stage-2-bootstrap.yml knot-cloud
 Wait until the bootstrap service is responsive, when the following command should succeed:
 
 ```
-curl http://localhost/healthcheck
+curl http://bootstrap.<your domain>/healthcheck
 ```
 
 #### Execute
@@ -61,7 +65,7 @@ curl http://localhost/healthcheck
 Once the services are started, run the bootstrap process:
 
 ```
-curl -X POST http://localhost/bootstrap
+curl -X POST http://bootstrap.<your domain>/bootstrap
 ```
 
 Save the output for the next steps.
