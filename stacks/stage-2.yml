@@ -9,5 +9,5 @@ services:
     deploy:
       labels:
         - traefik.enable=true
-        - traefik.frontend.rule=HostRegexp:{domain:[a-zA-Z0-9.]+},www.{domain:[a-zA-Z0-9.]+}
+        - traefik.frontend.rule=HostRegexp:www,www.{domain:[a-zA-Z0-9.]+}
         - traefik.port=80
