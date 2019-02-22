@@ -3,6 +3,11 @@ services:
   authenticator:
     image: cesarbr/knot-cloud-authenticator
     env_file: './env.d/knot-cloud-authenticator.env'
+    deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.frontend.rule=HostRegexp:auth,auth.{domain:[a-zA-Z0-9.]+}
+        - traefik.port=80
   ui:
     image: cesarbr/knot-cloud-ui
     env_file: './env.d/knot-cloud-ui.env'
