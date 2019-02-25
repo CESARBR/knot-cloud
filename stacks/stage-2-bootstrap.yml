@@ -4,6 +4,9 @@ services:
     image: cesarbr/knot-cloud-bootstrap
     env_file: './env.d/knot-cloud-bootstrap.env'
     deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
       labels:
         - traefik.enable=true
         - traefik.frontend.rule=HostRegexp:bootstrap,bootstrap.{domain:[a-zA-Z0-9.]+}

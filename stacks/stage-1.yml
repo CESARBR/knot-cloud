@@ -4,23 +4,46 @@ services:
   dispatcher:
     image: octoblu/meshblu-core-dispatcher
     env_file: './env.d/meshblu-core-dispatcher.env'
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
   worker-webhook:
     image: octoblu/meshblu-core-worker-webhook
     env_file: './env.d/meshblu-core-worker-webhook.env'
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
   protocol-adapter-http:
     image: octoblu/meshblu-core-protocol-adapter-http
     env_file: './env.d/meshblu-core-protocol-adapter-http.env'
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
   uuid-alias-service:
     image: cesarbr/uuid-alias-service
     env_file: './env.d/uuid-alias-service.env'
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
   uuid-alias-lookup-service:
     image: cesarbr/uuid-alias-lookup-service
     env_file: './env.d/uuid-alias-lookup-service.env'
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
   # KNoT Cloud
   protocol-adapter-websocket:
     image: cesarbr/knot-cloud-protocol-adapter-websocket
     env_file: './env.d/knot-cloud-protocol-adapter-websocket.env'
     deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
       labels:
         - traefik.enable=true
         - traefik.frontend.rule=HostRegexp:ws,ws.{domain:[a-zA-Z0-9.]+}
@@ -30,8 +53,16 @@ services:
     image: mongo
     volumes:
       - 'mongo-data:/data/db'
+    deploy:
+      resources:
+        limits:
+          memory: 300M
   redis:
     image: redis
+    deploy:
+      resources:
+        limits:
+          memory: 300M
   # Proxy
   traefik:
     image: traefik
@@ -45,6 +76,10 @@ services:
       - '80:80'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.role == manager]
 
 volumes:
   mongo-data:
