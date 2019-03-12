@@ -72,8 +72,12 @@ services:
         --docker.watch
         --docker.swarmMode
         --docker.exposedByDefault=false
+        --entryPoints='Name:http Address::80 Redirect.EntryPoint:https'
+        --entryPoints='Name:https Address::443 TLS'
+        --defaultEntryPoints=http,https
     ports:
       - '80:80'
+      - '443:443'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     deploy:
