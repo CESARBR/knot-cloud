@@ -57,7 +57,7 @@ docker stack deploy -c stage-2-bootstrap.yml knot-cloud
 Wait until the bootstrap service is responsive, when the following command should succeed:
 
 ```
-curl http://bootstrap.<your domain>/healthcheck
+curl -k https://bootstrap.<your domain>/healthcheck
 ```
 
 #### Execute
@@ -65,7 +65,7 @@ curl http://bootstrap.<your domain>/healthcheck
 Once the services are started, run the bootstrap process:
 
 ```
-curl -X POST http://bootstrap.<your domain>/bootstrap
+curl -k -X POST https://bootstrap.<your domain>/bootstrap
 ```
 
 Save the output for the next steps.
