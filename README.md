@@ -57,18 +57,22 @@ docker stack deploy -c stage-2-bootstrap.yml knot-cloud
 Wait until the bootstrap service is responsive, when the following command should succeed:
 
 ```
-curl http://bootstrap.<your domain>/healthcheck
+curl https://bootstrap.<your domain>/healthcheck
 ```
+
+**Note:** If the HTTPS certificates are not configured locally, traefik has a default certificate that is used in such cases. To use traefik's default certificate, it is necessary to add `-k` parameter to the `curl` command otherwise the request will fail.
 
 #### Execute
 
 Once the services are started, run the bootstrap process:
 
 ```
-curl -X POST http://bootstrap.<your domain>/bootstrap
+curl -X POST https://bootstrap.<your domain>/bootstrap
 ```
 
 Save the output for the next steps.
+
+**Note:** If the HTTPS certificates are not configured locally, traefik has a default certificate that is used in such cases. To use traefik's default certificate, it is necessary to add `-k` parameter to the `curl` command otherwise the request will fail.
 
 #### Tear down
 
