@@ -81,7 +81,7 @@ docker stack services knot-cloud
 Remove the bootstrap service (get the name from the list above):
 
 ```
-docker services rm <bootstrap-service-name>
+docker service rm <bootstrap-service-name>
 ```
 
 ### Configure
