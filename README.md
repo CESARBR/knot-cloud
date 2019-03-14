@@ -94,6 +94,13 @@ Set `RESET_SENDER_ADDRESS` with the e-mail address that will send the reset pass
 
 If this stack is being deployed on an accessible domain, replaced `RESET_URI` with **http://&lt;your-domain&gt;/reset**. This is the reset password address that is going to be sent by e-mail.
 
+**Note:** If you are NOT using the reset password feature (e.g.: locally testing new features), it is not necessary to have valids `MAILGUN_DOMAIN`, `MAILGUN_API_KEY`, `RESET_SENDER_ADDRESS`.
+```
+MAILGUN_DOMAIN=mailgun.domain
+MAILGUN_API_KEY=mailgun.key
+RESET_SENDER_ADDRESS=noreply@knot
+```
+
 ### Deploy
 
 Deploy the stage 2 services
