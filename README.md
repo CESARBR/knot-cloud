@@ -92,11 +92,34 @@ docker service rm <bootstrap-service-name>
 
 Get the authenticator's UUID and token from the bootstrap output and set `AUTHENTICATOR_UUID` and `AUTHENTICATOR_TOKEN` variables in `./env.d/knot-cloud-authenticator.env`.
 
-Set `MAILGUN_DOMAIN` and `MAILGUN_API_KEY` with the your [Mailgun](https://mailgun.com)'s account domain and API key.
+#### Configure mail service
+KNoT Cloud supports several mail services and is built in such a modular fashion that it is rather trivial to include a new one. Deploying KNoT Cloud without a mail service is also allowed, although not recommended other than for testing purposes.
+The supported mail services and related environment variables are:
+- Disable mail service
+    ```
+    MAIL_SERVICE=NONE
+    ```
+- Mailgun
+    ```
+    MAIL_SERVICE=MAILGUN
+    MAILGUN_DOMAIN=<your_mailgun_domain>
+    MAILGUN_API_KEY=<you_mailgun_api_key>
+    ```
+    Where `MAILGUN_DOMAIN` and `MAILGUN_API_KEY` are your [Mailgun](https://mailgun.com)'s account domain and API key.
+- AWS SES
+    ```
+    MAIL_SERVICE=AWS-SES
+    AWS_REGION=<aws_user_region>
+    AWS_ACCESS_KEY_ID=<aws_user_acess_key_id>
+    AWS_SECRET_ACCESS_KEY=<aws_user_secret_acess_key>
+    ```
+    Where `AWS_REGION`, `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are your [Amazon Web Services](https://aws.amazon.com/)' account information.
+    **If you are running KNoT Cloud on AWS EC2 that is using [roles to grant permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html), it is not necessary to set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`. The role attached to the EC2 instance must include a policy that allows `ses:SendEmail` actions at least on the domain used to send the reset e-mail (see `RESET_SENDER_ADDRESS` below).**
+    For more information on AWS SES policies, refer to their [documentation](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/control-user-access.html).
 
 Set `RESET_SENDER_ADDRESS` with the e-mail address that will send the reset password e-mails.
-
 If this stack is being deployed on an accessible domain, replaced `RESET_URI` with **http://&lt;your-domain&gt;/reset**. This is the reset password address that is going to be sent by e-mail.
+```
 
 ### Deploy
 
