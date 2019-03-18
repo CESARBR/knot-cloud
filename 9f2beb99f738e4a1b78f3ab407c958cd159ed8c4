@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a077d576_759f41f8",
+        "filename": "README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-03-18T16:57:52Z",
+      "side": 1,
+      "message": "Instead of putting -k here, add a note below explaining that if the user didn\u0027t configure the HTTPS certificates, it must add `-k` because traefik will use its default certificate.",
+      "revId": "9f2beb99f738e4a1b78f3ab407c958cd159ed8c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
