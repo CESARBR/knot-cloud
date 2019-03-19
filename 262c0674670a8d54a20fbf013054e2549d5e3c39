@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "ebaaea0b_fcebb1cb",
+        "filename": "README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-03-19T13:56:54Z",
+      "side": 1,
+      "message": "+1. I think it is, right after talking about HTTPS not configure. The reader might think that if not configured, it won\u0027t use HTTPS.",
+      "parentUuid": "62ffc2f9_c0e0802a",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 135
+      },
+      "revId": "262c0674670a8d54a20fbf013054e2549d5e3c39",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7870c169_14ba854c",
         "filename": "README.md",
         "patchSetId": 4
