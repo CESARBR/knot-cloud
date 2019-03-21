@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   authenticator:
-    image: cesarbr/knot-cloud-authenticator:v1.2.0
+    image: cesarbr/knot-cloud-authenticator:v1.3.0
     env_file: './env.d/knot-cloud-authenticator.env'
     deploy:
       replicas: 1
