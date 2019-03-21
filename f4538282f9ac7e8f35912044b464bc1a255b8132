@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b96d34a9_1f39c9e6",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-03-21T13:28:47Z",
+      "side": 1,
+      "message": "\"that is using [roles to grant permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html), it is not necessary (...). The role attached to the EC2 instance must include a policy that allows `ses:SendEmail` and `ses:SendRawEmail` actions at least on the domain used to send the reset e-mail (see `RESET_SENDER_ADDRESS` below). For more information on AWS SES policies, refer to their [documentation](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/control-user-access.html).\"\n\nIf this text is too big to fit in a **section**, feel free to rewrite or reorganize.",
+      "range": {
+        "startLine": 117,
+        "startChar": 38,
+        "endLine": 117,
+        "endChar": 46
+      },
+      "revId": "f4538282f9ac7e8f35912044b464bc1a255b8132",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
