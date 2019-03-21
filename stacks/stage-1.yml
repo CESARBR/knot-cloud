@@ -48,6 +48,17 @@ services:
         - traefik.enable=true
         - traefik.frontend.rule=HostRegexp:ws,ws.{domain:[a-zA-Z0-9.]+}
         - traefik.port=80
+  storage:
+    image: cesarbr/knot-cloud-storage:v1.0.0
+    env_file: './env.d/knot-cloud-storage.env'
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
+      labels:
+        - traefik.enable=true
+        - traefik.frontend.rule=HostRegexp:data,data.{domain:[a-zA-Z0-9.]+}
+        - traefik.port=80
   # Storage
   mongo:
     image: mongo

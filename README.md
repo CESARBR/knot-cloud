@@ -33,6 +33,7 @@ openssl rand -hex 16
 Finally, set `TOKEN`, `PRIVATE_KEY_BASE64` and `PUBLIC_KEY_BASE64` to the values above in:
 - `./env.d/meshblu-core-dispatcher.env`
 - `./env.d/meshblu-core-worker-webhook.env`
+- `./env.d/knot-cloud-storage.env`
 
 ### Deploy
 
