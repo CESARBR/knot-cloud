@@ -120,7 +120,6 @@ The supported mail services and related environment variables are:
 
 Set `RESET_SENDER_ADDRESS` with the e-mail address that will send the reset password e-mails.
 If this stack is being deployed on an accessible domain, replaced `RESET_URI` with **http://&lt;your-domain&gt;/reset**. This is the reset password address that is going to be sent by e-mail.
-```
 
 ### Deploy
 
