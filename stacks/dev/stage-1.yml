@@ -1,0 +1,90 @@
+version: '3.7'
+services:
+  # Meshblu
+  dispatcher:
+    image: octoblu/meshblu-core-dispatcher:v20.1.5
+    env_file: './env.d/meshblu-core-dispatcher.env'
+    deploy:
+      replicas: 1
+  worker-webhook:
+    image: octoblu/meshblu-core-worker-webhook:v4.2.0
+    env_file: './env.d/meshblu-core-worker-webhook.env'
+    deploy:
+      replicas: 1
+  protocol-adapter-http:
+    image: octoblu/meshblu-core-protocol-adapter-http:v6.1.3
+    env_file: './env.d/meshblu-core-protocol-adapter-http.env'
+    deploy:
+      replicas: 1
+  uuid-alias-service:
+    image: cesarbr/uuid-alias-service:v1.2.0
+    env_file: './env.d/uuid-alias-service.env'
+    deploy:
+      replicas: 1
+  uuid-alias-lookup-service:
+    image: cesarbr/uuid-alias-lookup-service:v1.1.4
+    env_file: './env.d/uuid-alias-lookup-service.env'
+    deploy:
+      replicas: 1
+  # KNoT Cloud
+  protocol-adapter-websocket:
+    image: cesarbr/knot-cloud-protocol-adapter-websocket:dev
+    env_file: './env.d/knot-cloud-protocol-adapter-websocket.env'
+    volumes:
+      - <path/to/knot-cloud-protocol-adapter-websocket>:/usr/src/app
+      - /usr/src/app/node_modules
+    deploy:
+      replicas: 1
+      labels:
+        - traefik.enable=true
+        - traefik.frontend.rule=HostRegexp:ws,ws.{domain:[a-zA-Z0-9.]+}
+        - traefik.port=80
+  storage:
+    image: cesarbr/knot-cloud-storage:dev
+    env_file: './env.d/knot-cloud-storage.env'
+    volumes:
+      - <path/to/knot-cloud-storage>:/usr/src/app
+      - /usr/src/app/node_modules
+    deploy:
+      replicas: 1
+      labels:
+        - traefik.enable=true
+        - traefik.frontend.rule=HostRegexp:data,data.{domain:[a-zA-Z0-9.]+}
+        - traefik.port=80
+  # Storage
+  mongo:
+    image: mongo
+    volumes:
+      - 'mongo-data:/data/db'
+    deploy:
+      resources:
+        limits:
+          memory: 300M
+  redis:
+    image: redis
+    deploy:
+      resources:
+        limits:
+          memory: 300M
+  # Proxy
+  traefik:
+    image: traefik
+    command: >
+      traefik
+        --docker
+        --docker.watch
+        --docker.swarmMode
+        --docker.exposedByDefault=false
+        --entryPoints='Name:http Address::80 Redirect.EntryPoint:https'
+        --entryPoints='Name:https Address::443 TLS'
+        --defaultEntryPoints=http,https
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      mode: global
+
+volumes:
+  mongo-data:
