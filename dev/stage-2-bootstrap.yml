@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  bootstrap:
+    image: cesarbr/knot-cloud-bootstrap:dev
+    env_file: './env.d/knot-cloud-bootstrap.env'
+    volumes:
+      - <path/to/repository/cloud/bootstrap>:/usr/src/app
+      - /usr/src/app/node_modules
+    deploy:
+      replicas: 1
+      labels:
+        - traefik.enable=true
+        - traefik.frontend.rule=HostRegexp:bootstrap,bootstrap.{domain:[a-zA-Z0-9.]+}
+        - traefik.port=80
