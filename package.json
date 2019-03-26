@@ -44,6 +44,7 @@
     "lint"
   ],
   "dependencies": {
+    "git-clone-repo": "^1.0.0",
     "yargs": "^13.2.2"
   }
 }
