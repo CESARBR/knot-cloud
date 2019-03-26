@@ -62,6 +62,29 @@
       "revId": "fa0c21407251da4d4b3fc6c2fde4030d63a4002f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32d164aa_b107681a",
+        "filename": "cli/index.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-03-26T21:25:42Z",
+      "side": 1,
+      "message": "Could we encapsulate this in a promise? Or does gitClone executes in a synchronous way?",
+      "range": {
+        "startLine": 20,
+        "startChar": 3,
+        "endLine": 26,
+        "endChar": 7
+      },
+      "revId": "fa0c21407251da4d4b3fc6c2fde4030d63a4002f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
