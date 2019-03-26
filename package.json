@@ -1,0 +1,46 @@
+{
+  "name": "knot-cloud-sdk",
+  "version": "1.0.0",
+  "description": "KNoT Cloud SDK",
+  "contributors": [
+    "Thiago Cardoso <thiago.figuerdo@cesar.org.br>",
+    "Paulo Serra Filho <ptvsf@cesar.org.br>",
+    "Ramon Ribeiro <rhpr@cesar.org.br>",
+    "Joao Alexandre Neto <joao.alexandre@cesar.org.br>"
+  ],
+  "main": "./build/index.js",
+  "scripts": {
+    "build": "babel cli --out-dir build",
+    "lint": "eslint --fix ./cli"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CESARBR/knot-cloud.git"
+  },
+  "keywords": [
+    "IoT",
+    "Cloud"
+  ],
+  "author": "KNoT",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CESARBR/knot-cloud/issues"
+  },
+  "homepage": "https://github.com/CESARBR/knot-cloud#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "babel-plugin-transform-builtin-extend": "^1.1.2",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-import-resolver-babel-module": "^5.0.1",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "pre-commit": "^1.2.2"
+  },
+  "pre-commit": [
+    "lint"
+  ]
+}
