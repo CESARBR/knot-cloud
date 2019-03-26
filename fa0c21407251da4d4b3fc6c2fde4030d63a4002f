@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f5de9530_508fb27a",
+        "filename": "cli/index.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-03-26T19:18:47Z",
+      "side": 1,
+      "message": "I know this lib gets the work done, but is there a specific reason for using it? \nI\u0027ve seen some other libs that are widely more used. Not sure which is the best approach though.\nhttps://www.npmjs.com/package/nodegit\nhttps://www.npmjs.com/package/git-clone",
+      "range": {
+        "startLine": 3,
+        "startChar": 22,
+        "endLine": 3,
+        "endChar": 36
+      },
+      "revId": "fa0c21407251da4d4b3fc6c2fde4030d63a4002f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5946b6f5_e70db068",
+        "filename": "cli/index.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-03-26T19:18:47Z",
+      "side": 1,
+      "message": "Should the knot-cloud-bootstrap also be downloaded?",
+      "revId": "fa0c21407251da4d4b3fc6c2fde4030d63a4002f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48c4bab8_177ad905",
+        "filename": "cli/index.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-03-26T19:18:47Z",
+      "side": 1,
+      "message": "What if there is an error with github/connection? Should we log it?",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 12
+      },
+      "revId": "fa0c21407251da4d4b3fc6c2fde4030d63a4002f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
