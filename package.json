@@ -42,5 +42,8 @@
   },
   "pre-commit": [
     "lint"
-  ]
+  ],
+  "dependencies": {
+    "yargs": "^13.2.2"
+  }
 }
