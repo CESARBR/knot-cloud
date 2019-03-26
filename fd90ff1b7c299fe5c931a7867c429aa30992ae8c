@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7701fbf6_26a5373b",
+        "filename": "package.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-03-26T17:50:46Z",
+      "side": 1,
+      "message": "I think we\u0027ll publish this in the scope of @cesarbr project.\n\"@cesarbr/knot-cloud-sdk\"\n\nAlso, are we going with the SDK name? Perhaps knot-cloud-cli and then we would expand the tool to allow interactions with the cloud?",
+      "range": {
+        "startLine": 2,
+        "startChar": 11,
+        "endLine": 2,
+        "endChar": 25
+      },
+      "revId": "fd90ff1b7c299fe5c931a7867c429aa30992ae8c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
