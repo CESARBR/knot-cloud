@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fb9163ee_dc81b494",
+        "filename": "dev/stage-2-bootstrap.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-03-26T20:53:20Z",
+      "side": 1,
+      "message": "Not sure if should use the \u0027dev\u0027 docker for knot-cloud-bootstrap",
+      "revId": "e274e374d8631a4bf07fb7c791a0ca6a02a1f158",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
