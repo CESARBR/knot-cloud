@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "510ac0b5_e5cbec99",
+        "filename": "cli/index.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-03-26T18:56:20Z",
+      "side": 1,
+      "message": "Is the default path going to be home?\nIMO could be the current path, as if the package is not globally installed it may not behave correctly in the home dir (or is this incorrect?)",
+      "range": {
+        "startLine": 9,
+        "startChar": 18,
+        "endLine": 9,
+        "endChar": 37
+      },
+      "revId": "d4159c3790bf6f6879952c4168c41ab3ba3c4f70",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
