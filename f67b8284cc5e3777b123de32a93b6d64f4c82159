@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "1b9861f1_30e6080b",
+        "filename": ".babelrc",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-03-27T19:58:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "14c2bf6f_b5cfb5bc",
+      "range": {
+        "startLine": 16,
+        "startChar": 20,
+        "endLine": 16,
+        "endChar": 23
+      },
+      "revId": "f67b8284cc5e3777b123de32a93b6d64f4c82159",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3cf643e6_b7ca8279",
         "filename": ".eslintrc",
         "patchSetId": 4
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "777cf52f_ea9cfc79",
+        "filename": ".eslintrc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-03-27T19:58:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "91bf2c15_cdc75a43",
+      "range": {
+        "startLine": 2,
+        "startChar": 15,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "f67b8284cc5e3777b123de32a93b6d64f4c82159",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fd8818ae_1d54602a",
         "filename": "cli/index.js",
         "patchSetId": 4
@@ -125,6 +173,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "fd8818ae_1d54602a",
+      "revId": "f67b8284cc5e3777b123de32a93b6d64f4c82159",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27b49c0e_b5915e97",
+        "filename": "cli/index.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-03-27T19:58:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f75a342c_d51920a1",
       "revId": "f67b8284cc5e3777b123de32a93b6d64f4c82159",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -166,6 +232,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "e4819bc3_e9970aa5",
+      "range": {
+        "startLine": 2,
+        "startChar": 30,
+        "endLine": 2,
+        "endChar": 34
+      },
+      "revId": "f67b8284cc5e3777b123de32a93b6d64f4c82159",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72f3972f_ea85a5f6",
+        "filename": "package.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-03-27T19:58:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "60206a77_a605f604",
       "range": {
         "startLine": 2,
         "startChar": 30,
@@ -225,6 +315,30 @@
     },
     {
       "key": {
+        "uuid": "cd76985b_7929e6d0",
+        "filename": "package.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-03-27T19:58:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4d4f2fbf_1bd6be89",
+      "range": {
+        "startLine": 3,
+        "startChar": 14,
+        "endLine": 3,
+        "endChar": 19
+      },
+      "revId": "f67b8284cc5e3777b123de32a93b6d64f4c82159",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9310f93e_9ccee4af",
         "filename": "package.json",
         "patchSetId": 4
@@ -260,6 +374,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "9310f93e_9ccee4af",
+      "range": {
+        "startLine": 17,
+        "startChar": 20,
+        "endLine": 17,
+        "endChar": 25
+      },
+      "revId": "f67b8284cc5e3777b123de32a93b6d64f4c82159",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "570ce025_1cfebcdd",
+        "filename": "package.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-03-27T19:58:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9089b473_c40552e0",
       "range": {
         "startLine": 17,
         "startChar": 20,
