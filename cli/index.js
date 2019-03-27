@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 import yargs from 'yargs';
 import gitClone from 'git-clone-repo';
+import fs from 'fs-extra';
+import path from 'path';
 
 const REPOSITORIES = [
   'CESARBR/knot-cloud-ui',
@@ -8,6 +10,19 @@ const REPOSITORIES = [
   'CESARBR/knot-cloud-authenticator',
   'CESARBR/knot-cloud-storage',
 ];
+
+const cpDevDir = (basePath) => {
+  const stackDir = path.join(basePath, 'stack');
+  try {
+    if (fs.existsSync(stackDir)) {
+      fs.removeSync(stackDir);
+    }
+    fs.ensureDirSync(stackDir);
+    fs.copySync('/dev', stackDir);
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 yargs // eslint-disable-line no-unused-expressions
   .command('init [path]', 'init stack', (_yargs) => {
@@ -25,6 +40,7 @@ yargs // eslint-disable-line no-unused-expressions
         console.error('Repository already exists');
       }
     });
+    cpDevDir(args.path);
   })
   .demandCommand()
   .help()
