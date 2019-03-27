@@ -16,6 +16,47 @@
       "revId": "e274e374d8631a4bf07fb7c791a0ca6a02a1f158",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de4d584b_b728e76a",
+        "filename": "dev/stage-2-bootstrap.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-03-27T16:45:16Z",
+      "side": 1,
+      "message": "I think we should too, we can make additions and bug fixes to it.",
+      "parentUuid": "fb9163ee_dc81b494",
+      "revId": "e274e374d8631a4bf07fb7c791a0ca6a02a1f158",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ed56f34_de43622d",
+        "filename": "dev/stage-2-bootstrap.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-03-27T16:45:16Z",
+      "side": 1,
+      "message": "I think this can be confusing. Why `cloud`? I suggest only keeping the first parts of the path (`\u003cpath/to/repository\u003e`) or add the full name of the repository as it is downloaded by default, e.g. `\u003cpath/to/knot-cloud-bootstrap\u003e`.",
+      "range": {
+        "startLine": 7,
+        "startChar": 28,
+        "endLine": 7,
+        "endChar": 43
+      },
+      "revId": "e274e374d8631a4bf07fb7c791a0ca6a02a1f158",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
