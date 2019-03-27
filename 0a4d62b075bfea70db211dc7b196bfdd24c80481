@@ -22,6 +22,30 @@
       "revId": "0a4d62b075bfea70db211dc7b196bfdd24c80481",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "013cf95b_94e98913",
+        "filename": "cli/index.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2019-03-27T18:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8ce202d_397c3e2d",
+      "range": {
+        "startLine": 25,
+        "startChar": 22,
+        "endLine": 25,
+        "endChar": 27
+      },
+      "revId": "0a4d62b075bfea70db211dc7b196bfdd24c80481",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
