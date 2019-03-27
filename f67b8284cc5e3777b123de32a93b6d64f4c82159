@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b2286e8e_c6eceaee",
+        "filename": ".babelrc",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-03-27T16:49:17Z",
+      "side": 1,
+      "message": "Use `src`",
+      "range": {
+        "startLine": 16,
+        "startChar": 20,
+        "endLine": 16,
+        "endChar": 23
+      },
+      "revId": "f67b8284cc5e3777b123de32a93b6d64f4c82159",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cf643e6_b7ca8279",
+        "filename": ".eslintrc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-03-27T16:49:17Z",
+      "side": 1,
+      "message": "Use airbnb-base",
+      "range": {
+        "startLine": 2,
+        "startChar": 15,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "f67b8284cc5e3777b123de32a93b6d64f4c82159",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd8818ae_1d54602a",
+        "filename": "cli/index.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-03-27T16:49:17Z",
+      "side": 1,
+      "message": "src/index.js",
+      "revId": "f67b8284cc5e3777b123de32a93b6d64f4c82159",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4819bc3_e9970aa5",
+        "filename": "package.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-03-27T16:49:17Z",
+      "side": 1,
+      "message": "knot-cloud",
+      "range": {
+        "startLine": 2,
+        "startChar": 30,
+        "endLine": 2,
+        "endChar": 34
+      },
+      "revId": "f67b8284cc5e3777b123de32a93b6d64f4c82159",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94af630f_335c7e05",
+        "filename": "package.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-03-27T16:49:17Z",
+      "side": 1,
+      "message": "0.1.0 for now. We move to 1.0.0 when it is ready to be published.",
+      "range": {
+        "startLine": 3,
+        "startChar": 14,
+        "endLine": 3,
+        "endChar": 19
+      },
+      "revId": "f67b8284cc5e3777b123de32a93b6d64f4c82159",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9310f93e_9ccee4af",
+        "filename": "package.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-03-27T16:49:17Z",
+      "side": 1,
+      "message": "Don\u0027t automatically fix the issues, just warn the user.",
+      "range": {
+        "startLine": 17,
+        "startChar": 20,
+        "endLine": 17,
+        "endChar": 25
+      },
+      "revId": "f67b8284cc5e3777b123de32a93b6d64f4c82159",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2e9218b_23545ef7",
+        "filename": "package.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-03-27T16:49:17Z",
+      "side": 1,
+      "message": "Install the base instead of the full (it removes react stuff). See https://www.npmjs.com/package/eslint-config-airbnb-base (you\u0027ll need to remove and install again)",
+      "range": {
+        "startLine": 39,
+        "startChar": 5,
+        "endLine": 39,
+        "endChar": 25
+      },
+      "revId": "f67b8284cc5e3777b123de32a93b6d64f4c82159",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
