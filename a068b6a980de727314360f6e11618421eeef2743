@@ -46,6 +46,30 @@
       "revId": "a068b6a980de727314360f6e11618421eeef2743",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "866c4cbc_19c2f029",
+        "filename": "package.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1013169
+      },
+      "writtenOn": "2019-03-28T15:14:17Z",
+      "side": 1,
+      "message": "You need to follow the NPM package instructions: https://www.npmjs.com/package/eslint-config-airbnb-base\n\ne.g.\nI\u0027ve done these steps and only three packages were installed:\n\nnpm info \"eslint-config-airbnb-base@latest\" peerDependencies (to check the dependencies)\nnpx install-peerdeps --dev eslint-config-airbnb-base (to install them)\n\nPs: remember to keep the \u0027eslint-import-resolver-babel-module\u0027 package, it isn\u0027t installed on the the previous step.",
+      "parentUuid": "75800ca7_b8ed4823",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 37
+      },
+      "revId": "a068b6a980de727314360f6e11618421eeef2743",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
