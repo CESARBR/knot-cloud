@@ -91,6 +91,30 @@
       "revId": "3ec4f4e2e5a787cc24d9b855d0dd92ed51fd89f3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d2edfd5_c5a43cc6",
+        "filename": "src/index.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-03-28T13:00:45Z",
+      "side": 1,
+      "message": "See Figueredo\u0027s comments on my patch following this patchset.\n\nI think we should log some message to the user and create a file containing the error or some more descriptive explanation about the issue, similar to what npm and yarn do. \n\n\u0027knot.err\u0027 (and knot.log, if necessary) sounds good?",
+      "parentUuid": "262aa5fe_57b034d3",
+      "range": {
+        "startLine": 27,
+        "startChar": 22,
+        "endLine": 27,
+        "endChar": 41
+      },
+      "revId": "3ec4f4e2e5a787cc24d9b855d0dd92ed51fd89f3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
