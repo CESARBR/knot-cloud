@@ -47,6 +47,7 @@
     "lint"
   ],
   "dependencies": {
+    "fs-extra": "^7.0.1",
     "git-clone": "^0.1.0",
     "yargs": "^13.2.2"
   }
