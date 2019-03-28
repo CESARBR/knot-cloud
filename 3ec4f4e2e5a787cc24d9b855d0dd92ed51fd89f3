@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "a86b69f1_99c86a1c",
+        "filename": "src/index.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-03-28T13:07:20Z",
+      "side": 1,
+      "message": "Nvm, we DO need this.",
+      "parentUuid": "905ecbc9_864c04f3",
+      "range": {
+        "startLine": 26,
+        "startChar": 21,
+        "endLine": 26,
+        "endChar": 43
+      },
+      "revId": "3ec4f4e2e5a787cc24d9b855d0dd92ed51fd89f3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bbc578d8_897827e7",
         "filename": "src/index.js",
         "patchSetId": 6
