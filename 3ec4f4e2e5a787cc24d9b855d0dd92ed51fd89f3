@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15c96002_b012b14a",
+        "filename": "src/index.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-03-28T12:57:24Z",
+      "side": 1,
+      "message": "It does not check if we have ${repo}.git in the folder, what might cause duplicates.\nFrom what I remember, we discussed that the user could have the \u0027.git\u0027 at the end of the repo name as this is a fairly common practice.",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 14
+      },
+      "revId": "3ec4f4e2e5a787cc24d9b855d0dd92ed51fd89f3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "905ecbc9_864c04f3",
+        "filename": "src/index.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-03-28T12:57:24Z",
+      "side": 1,
+      "message": "I don\u0027t think this is necessary as if you do \u0027$git clone\u0027 it will automatically create a new folder with the repository name.",
+      "range": {
+        "startLine": 26,
+        "startChar": 21,
+        "endLine": 26,
+        "endChar": 43
+      },
+      "revId": "3ec4f4e2e5a787cc24d9b855d0dd92ed51fd89f3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbc578d8_897827e7",
+        "filename": "src/index.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-03-28T12:57:24Z",
+      "side": 1,
+      "message": "I\u0027ve done some testing and the clone is NOT occurring sync.\nSo IMO we should explicitly say the repo that was cloned \u0027Cloned knot-cloud-...\u0027\nAt some point, I think we\u0027ll have to guarantee that the clones were finished before proceeding as we\u0027ll need the repository paths (if they contain .git at the end or not).",
+      "range": {
+        "startLine": 27,
+        "startChar": 56,
+        "endLine": 27,
+        "endChar": 62
+      },
+      "revId": "3ec4f4e2e5a787cc24d9b855d0dd92ed51fd89f3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "262aa5fe_57b034d3",
+        "filename": "src/index.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-03-28T12:57:24Z",
+      "side": 1,
+      "message": "If the repo exists, the log show an error, but I think we should handle this and not show it to the user as he may think the command did not work, what do you think?\nError: \u0027git clone\u0027 failed with status 128\n    at ChildProcess.\u003canonymous\u003e (/home/pauloserrafilho/Documents/KNoT/knot-cloud/node_modules/git-clone/index.js:33:22)\n    at ChildProcess.emit (events.js:182:13)\n    at maybeClose (internal/child_process.js:962:16)\n    at Socket.stream.socket.on (internal/child_process.js:381:11)\n    at Socket.emit (events.js:182:13)\n    at Pipe._handle.close (net.js:611:12)",
+      "range": {
+        "startLine": 27,
+        "startChar": 22,
+        "endLine": 27,
+        "endChar": 41
+      },
+      "revId": "3ec4f4e2e5a787cc24d9b855d0dd92ed51fd89f3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
