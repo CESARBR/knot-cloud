@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "614a29f7_ad898430",
+        "filename": "src/index.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-03-29T14:29:05Z",
+      "side": 1,
+      "message": "After discussion with Figueredo, this is not going to be supported in first release (unless it\u0027s straightforward to do).",
+      "parentUuid": "15c96002_b012b14a",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 14
+      },
+      "revId": "3ec4f4e2e5a787cc24d9b855d0dd92ed51fd89f3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "905ecbc9_864c04f3",
         "filename": "src/index.js",
         "patchSetId": 6
