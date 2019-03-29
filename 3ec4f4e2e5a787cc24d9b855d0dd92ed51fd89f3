@@ -163,6 +163,30 @@
       "revId": "3ec4f4e2e5a787cc24d9b855d0dd92ed51fd89f3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5114c24_e6266d22",
+        "filename": "src/index.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2019-03-29T21:11:49Z",
+      "side": 1,
+      "message": "I like the idea from a log file",
+      "parentUuid": "4d2edfd5_c5a43cc6",
+      "range": {
+        "startLine": 27,
+        "startChar": 22,
+        "endLine": 27,
+        "endChar": 41
+      },
+      "revId": "3ec4f4e2e5a787cc24d9b855d0dd92ed51fd89f3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
