@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe4bdab0_57b08c84",
+        "filename": "src/index.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2019-03-29T21:19:34Z",
+      "side": 1,
+      "message": "As in npm logs it is not in json format let\u0027s use \u0027writeFileSync\u0027",
+      "range": {
+        "startLine": 29,
+        "startChar": 7,
+        "endLine": 29,
+        "endChar": 20
+      },
+      "revId": "386089a8cd77f4623d1c1f6f1c5028bbae2451e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e2b7d8b_0761a858",
+        "filename": "src/index.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2019-03-29T21:19:34Z",
+      "side": 1,
+      "message": "you can log the stack trace using err.stack",
+      "range": {
+        "startLine": 32,
+        "startChar": 15,
+        "endLine": 32,
+        "endChar": 18
+      },
+      "revId": "386089a8cd77f4623d1c1f6f1c5028bbae2451e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "778a4d23_1251165e",
+        "filename": "src/index.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2019-03-29T21:19:34Z",
+      "side": 1,
+      "message": "If there is already a file it will override the content if some clone fails.\nAdd `{ flag: \u0027a\u0027 }` to allow appending",
+      "range": {
+        "startLine": 33,
+        "startChar": 7,
+        "endLine": 33,
+        "endChar": 8
+      },
+      "revId": "386089a8cd77f4623d1c1f6f1c5028bbae2451e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
