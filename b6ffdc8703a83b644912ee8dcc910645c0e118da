@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9777dfc_1fbcbd6b",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2019-03-29T21:24:45Z",
+      "side": 1,
+      "message": "it will already bin variable PATH when installed globally.\n\nTo run locally:\nnpm i\nnpm run build \u0026\u0026 npm link\nnpx knot-cloud init ./test-dir",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 15
+      },
+      "revId": "b6ffdc8703a83b644912ee8dcc910645c0e118da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
