@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "375584cc_42db6ec7",
+        "filename": "src/index.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-03-30T21:46:42Z",
+      "side": 1,
+      "message": "Remove the \u0027knot.err\u0027 file if it exists and create a new one. \nOtherwise if there is already an file there and you run \u0027init\u0027 twice it would cause the most recent logs to be at the end of the file and the user will not know if the error is from this run or from previous ones.",
+      "revId": "f3ce58cc8bfab74e4b54c4730d672a7840d9e872",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "968cfd38_f0fcdc44",
+        "filename": "src/index.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-03-30T21:46:42Z",
+      "side": 1,
+      "message": "Let the user know that he/she can look into knot.err to see more details.",
+      "revId": "f3ce58cc8bfab74e4b54c4730d672a7840d9e872",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
