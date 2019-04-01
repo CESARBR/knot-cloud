@@ -46,6 +46,30 @@
       "revId": "e58c7a7805ccf1808d163c5c3ffdef535cb7c4e5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f24ed94_a909d24d",
+        "filename": "stacks/dev/stage-1.yml",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1013169
+      },
+      "writtenOn": "2019-04-01T19:37:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5b5add4c_d13276a3",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 61
+      },
+      "revId": "e58c7a7805ccf1808d163c5c3ffdef535cb7c4e5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
