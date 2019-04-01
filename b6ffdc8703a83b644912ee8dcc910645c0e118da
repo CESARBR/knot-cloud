@@ -118,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "392ddaea_9cd7cded",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-04-01T18:27:09Z",
+      "side": 1,
+      "message": "I\u0027m actually waiting for the publish on NPM as we already have a package named knot-cloud there.",
+      "parentUuid": "397a2873_15abcf37",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 60
+      },
+      "revId": "b6ffdc8703a83b644912ee8dcc910645c0e118da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7e4abd4b_0167904c",
         "filename": "README.md",
         "patchSetId": 2
