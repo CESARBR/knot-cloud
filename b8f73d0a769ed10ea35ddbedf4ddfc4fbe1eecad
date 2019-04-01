@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39474c1b_93d3bc0f",
+        "filename": "src/index.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1013169
+      },
+      "writtenOn": "2019-04-01T13:36:12Z",
+      "side": 1,
+      "message": "\u0027if there is a connection problem\u0027",
+      "range": {
+        "startLine": 18,
+        "startChar": 40,
+        "endLine": 18,
+        "endChar": 41
+      },
+      "revId": "b8f73d0a769ed10ea35ddbedf4ddfc4fbe1eecad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd7cae08_90df482a",
+        "filename": "src/index.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1013169
+      },
+      "writtenOn": "2019-04-01T13:36:12Z",
+      "side": 1,
+      "message": "about",
+      "range": {
+        "startLine": 19,
+        "startChar": 25,
+        "endLine": 19,
+        "endChar": 27
+      },
+      "revId": "b8f73d0a769ed10ea35ddbedf4ddfc4fbe1eecad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79c0321a_c659bcb5",
+        "filename": "src/index.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1013169
+      },
+      "writtenOn": "2019-04-01T13:36:12Z",
+      "side": 1,
+      "message": "You can create a separated function to do this error handling. Thus, define the message on its scope wouldn\u0027t be a problem.",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 0
+      },
+      "revId": "b8f73d0a769ed10ea35ddbedf4ddfc4fbe1eecad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
