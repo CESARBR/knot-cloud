@@ -94,6 +94,30 @@
     },
     {
       "key": {
+        "uuid": "f2b1c07b_e634bb6a",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-04-01T18:24:33Z",
+      "side": 1,
+      "message": "\"Using the tool provided by the package you can\"\n\nThis sounds as if the tool provides an option only to clone the repos, IMO.",
+      "parentUuid": "aea93cda_1c89e9c2",
+      "range": {
+        "startLine": 14,
+        "startChar": 62,
+        "endLine": 14,
+        "endChar": 154
+      },
+      "revId": "b6ffdc8703a83b644912ee8dcc910645c0e118da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7e4abd4b_0167904c",
         "filename": "README.md",
         "patchSetId": 2
@@ -151,6 +175,30 @@
       "writtenOn": "2019-03-29T21:24:45Z",
       "side": 1,
       "message": "it will already bin variable PATH when installed globally.\n\nTo run locally:\nnpm i\nnpm run build \u0026\u0026 npm link\nnpx knot-cloud init ./test-dir",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 15
+      },
+      "revId": "b6ffdc8703a83b644912ee8dcc910645c0e118da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2bba6211_bd31ba18",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-04-01T18:24:33Z",
+      "side": 1,
+      "message": "\"it will already bin variable PATH when installed globally.\"\nDid not understand this comment.",
+      "parentUuid": "d9777dfc_1fbcbd6b",
       "range": {
         "startLine": 25,
         "startChar": 0,
