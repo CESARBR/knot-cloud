@@ -22,6 +22,30 @@
       "revId": "e58c7a7805ccf1808d163c5c3ffdef535cb7c4e5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b5add4c_d13276a3",
+        "filename": "stacks/dev/stage-1.yml",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-04-01T17:58:48Z",
+      "side": 1,
+      "message": "Because we\u0027ll no longer change the YAML file. \nThe defined behavior for the CLI is that it clones all the repos in the \u003cpath\u003e used in the command line and copies the development stack to \u003cpath\u003e/stack. Meaning the development folders will always be (at least for now) a level above the YAML file.",
+      "parentUuid": "3b666cea_c8d3393e",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 61
+      },
+      "revId": "e58c7a7805ccf1808d163c5c3ffdef535cb7c4e5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
