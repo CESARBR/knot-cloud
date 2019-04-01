@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "dceb929b_ea5e9371",
+        "filename": "src/index.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-04-01T18:17:46Z",
+      "side": 1,
+      "message": "Why is this defined as a function? Couldn\u0027t this be just a const?\nIf you\u0027re defining as a function, the console.log() should be in here, instead of calling console.log(logFileMessa());",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 27
+      },
+      "revId": "b8f73d0a769ed10ea35ddbedf4ddfc4fbe1eecad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e356a1fe_79c48732",
         "filename": "src/index.js",
         "patchSetId": 10
@@ -151,6 +174,30 @@
       "writtenOn": "2019-04-01T13:36:12Z",
       "side": 1,
       "message": "You can create a separated function to do this error handling. Thus, define the message on its scope wouldn\u0027t be a problem.",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 0
+      },
+      "revId": "b8f73d0a769ed10ea35ddbedf4ddfc4fbe1eecad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b603f94_1471a316",
+        "filename": "src/index.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-04-01T18:17:46Z",
+      "side": 1,
+      "message": "We\u0027ll have more error messages in the future, I think we could have some generic function to receive the message and the stack and write to the file.",
+      "parentUuid": "79c0321a_c659bcb5",
       "range": {
         "startLine": 40,
         "startChar": 0,
