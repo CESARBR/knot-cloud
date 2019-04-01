@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b666cea_c8d3393e",
+        "filename": "stacks/dev/stage-1.yml",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1013169
+      },
+      "writtenOn": "2019-04-01T13:45:09Z",
+      "side": 1,
+      "message": "The patch is ok, but just for curiosity why did you change from \u003cpath/to/repository\u003e to ../repository?",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 61
+      },
+      "revId": "e58c7a7805ccf1808d163c5c3ffdef535cb7c4e5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
