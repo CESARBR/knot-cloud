@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "86f8ebd0_a5ef3e8e",
+        "filename": "README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-04-02T16:53:59Z",
+      "side": 1,
+      "message": "Still need to define the package name. Possibly @cesarbr/knot-cloud.",
+      "revId": "afbd525062e40fa7b0f22909046732d53441486a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
