@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4111b49_fb59c0b9",
+        "filename": "src/index.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-04-02T14:41:39Z",
+      "side": 1,
+      "message": "Error: ENOENT: no such file or directory, unlink \u0027knot.err\u0027",
+      "revId": "f4a721ee33ec756f73a8c181cdab349f88140af4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
