@@ -165,6 +165,30 @@
     },
     {
       "key": {
+        "uuid": "28289dd9_cf98a1a2",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-04-02T16:40:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e4abd4b_0167904c",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 69
+      },
+      "revId": "b6ffdc8703a83b644912ee8dcc910645c0e118da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "305eabb0_c360ba5b",
         "filename": "README.md",
         "patchSetId": 2
@@ -185,6 +209,30 @@
       "revId": "b6ffdc8703a83b644912ee8dcc910645c0e118da",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63dcb3cf_81d291e3",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-04-02T16:40:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "305eabb0_c360ba5b",
+      "range": {
+        "startLine": 23,
+        "startChar": 11,
+        "endLine": 23,
+        "endChar": 15
+      },
+      "revId": "b6ffdc8703a83b644912ee8dcc910645c0e118da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     },
     {
       "key": {
@@ -247,6 +295,30 @@
       "side": 1,
       "message": "Sorry. I mean:\n\"The binary `knot-cloud` will be in the environment variable PATH when installed globally\"\nActually I mean to remove the `node ` from the command.",
       "parentUuid": "2bba6211_bd31ba18",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 15
+      },
+      "revId": "b6ffdc8703a83b644912ee8dcc910645c0e118da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f82aae1e_fe2ea04a",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-04-02T16:40:20Z",
+      "side": 1,
+      "message": "I was discussing with Figueredo and he suggested that we don\u0027t worry about local installs. If the user wants to install it locally, we\u0027ll assume that he knows how to use npx. What do you think?",
+      "parentUuid": "d17669d0_39636ae0",
       "range": {
         "startLine": 25,
         "startChar": 0,
