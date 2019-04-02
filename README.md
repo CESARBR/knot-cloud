@@ -2,9 +2,30 @@
 
 KNoT Cloud Docker stack.
 
+Stacks for development and production are provided in order to assist the user needs. Regardless of running in production or development, check the [local deployment considerations](#local-deployment-considerations) if it applies to your scenario.
+If you are running in production mode, go ahead to [configure and deploy your stack](#stage-1).
+For development, a command line interface (CLI) is provided to properly configure the environment necessary.
+
 ## Local deployment considerations
 
 This stack uses [Traefik](https://traefik.io) as a reverse proxy for the services in the stack. If you are running this stack locally, might want to configure a test domain in your machine before proceeding.
+
+## Create development environment
+The [knot-cloud](https://www.npmjs.com/) is available on NPM. It will clone all the necessary KNoT repositories and create the files used by docker stack.
+
+### Install CLI tool
+It is recommended to install as a global package to allow creation of the stack in any directory.
+```
+npm install -g knot-cloud
+```
+
+### Run
+Define the `<path>` where the stack should be created.
+```
+knot-cloud init <path>
+```
+
+Now you can proceed to configure the necessary files to run KNoT Cloud, they will be under `<path>/stack`.
 
 ## Stage 1
 
