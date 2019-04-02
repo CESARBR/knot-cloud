@@ -22,12 +22,32 @@ const logFileMessageRepository = `
         on the destination directory or if there is a connection problem.
         Check ${KNOT_ERR_PATH} for more details about the issue\n`;
 
+const logFileMessageCopyStack = `
+        This is mostly associated with write permissions on the destination
+        directory, check ${KNOT_ERR_PATH} for details on the issue.\n`;
+
 function handleError(err, msg, logFileMessage) {
   console.error(msg, logFileMessage);
   fs.ensureDirSync(KNOT_ERR_DIR);
   fs.writeFileSync(KNOT_ERR_PATH, `${msg}\n`, { flag: 'a', encoding: 'utf-8' });
   fs.writeFileSync(KNOT_ERR_PATH, `${err.stack}\n`, { flag: 'a', encoding: 'utf-8' });
 }
+
+const cpDevDir = (basePath) => {
+  const stackDir = path.join(basePath, 'stack');
+
+  try {
+    if (fs.existsSync(stackDir)) {
+      fs.removeSync(stackDir);
+    }
+    fs.ensureDirSync(stackDir);
+    fs.copySync('stacks/dev', stackDir);
+    console.log('Created development stack files');
+  } catch (err) {
+    const msg = '[Error]:\n\tAn error occurred while copying the development stack files.';
+    handleError(err, msg, logFileMessageCopyStack);
+  }
+};
 
 yargs // eslint-disable-line no-unused-expressions
   .command('init [path]', 'initialize stack', (_yargs) => {
@@ -57,6 +77,7 @@ yargs // eslint-disable-line no-unused-expressions
         },
       );
     });
+    cpDevDir(args.path);
   })
   .demandCommand()
   .help()
