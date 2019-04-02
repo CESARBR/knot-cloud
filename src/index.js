@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import yargs from 'yargs';
 import gitClone from 'git-clone';
-import fs from 'fs';
+import fs from 'fs-extra';
 import path from 'path';
 
 const REPOSITORIES = [
@@ -18,12 +18,31 @@ const logFileMessageRepository = `
         on the destination directory or if there is a connection problem.
         Check ${path.resolve('knot.err')} for more details about the issue\n`;
 
+const logFileMessageCopyStack = `
+        This is mostly associated with write permissions on the destination directory,
+        check ${path.resolve('knot.err')} for details on the issue.\n`;
+
 function handleError(err, msg, logFileMessage) {
   console.error(msg);
   console.error(logFileMessage);
   fs.writeFileSync('knot.err', `${msg}\n`, { flag: 'a', encoding: 'utf-8' });
   fs.writeFileSync('knot.err', `${err.stack}\n`, { flag: 'a', encoding: 'utf-8' });
 }
+
+const cpDevDir = (basePath) => {
+  const stackDir = path.join(basePath, 'stack');
+  try {
+    if (fs.existsSync(stackDir)) {
+      fs.removeSync(stackDir);
+    }
+    fs.ensureDirSync(stackDir);
+    fs.copySync('stacks/dev', stackDir);
+    console.log('Created development stack files');
+  } catch (err) {
+    const msg = '[Error]:\n\tAn error occurred while copying the development stack files.';
+    handleError(err, msg, logFileMessageCopyStack);
+  }
+};
 
 yargs // eslint-disable-line no-unused-expressions
   .command('init [path]', 'initialize stack', (_yargs) => {
@@ -51,6 +70,7 @@ yargs // eslint-disable-line no-unused-expressions
         },
       );
     });
+    cpDevDir(args.path);
   })
   .demandCommand()
   .help()
