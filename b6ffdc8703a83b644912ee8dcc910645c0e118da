@@ -232,6 +232,30 @@
       "revId": "b6ffdc8703a83b644912ee8dcc910645c0e118da",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d17669d0_39636ae0",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2019-04-02T16:13:30Z",
+      "side": 1,
+      "message": "Sorry. I mean:\n\"The binary `knot-cloud` will be in the environment variable PATH when installed globally\"\nActually I mean to remove the `node ` from the command.",
+      "parentUuid": "2bba6211_bd31ba18",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 15
+      },
+      "revId": "b6ffdc8703a83b644912ee8dcc910645c0e118da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
