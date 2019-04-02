@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3ca2bb2_a119f142",
+        "filename": "src/index.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-04-02T19:06:14Z",
+      "side": 1,
+      "message": "KNOT_ERR_FILE\n\nAs we might have an actual log file in the future.",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 19
+      },
+      "revId": "eebfe5fc93edf056bf42242243e9e664ad0ee7db",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8be8eef6_190b6638",
+        "filename": "src/index.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-04-02T19:06:14Z",
+      "side": 1,
+      "message": "KNOT_ERR_PATH or PATH_KNOT_ERR",
+      "range": {
+        "startLine": 18,
+        "startChar": 6,
+        "endLine": 18,
+        "endChar": 19
+      },
+      "revId": "eebfe5fc93edf056bf42242243e9e664ad0ee7db",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f8b5115_2284e455",
+        "filename": "src/index.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-04-02T19:06:14Z",
+      "side": 1,
+      "message": "KNOT_ERR_FILE",
+      "range": {
+        "startLine": 18,
+        "startChar": 46,
+        "endLine": 18,
+        "endChar": 59
+      },
+      "revId": "eebfe5fc93edf056bf42242243e9e664ad0ee7db",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bdc0987_c06c76ab",
+        "filename": "src/index.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-04-02T19:06:14Z",
+      "side": 1,
+      "message": "If you use fs-extra, this is automatically handled using ensureDir[Sync] (works like mkdir -p). https://www.npmjs.com/package/fs-extra\n\nThe next patch will most likely use fs-extra anyways, as well need `mkdir -p` and `cp -r` like behaviors.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 1
+      },
+      "revId": "eebfe5fc93edf056bf42242243e9e664ad0ee7db",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c9b27e5_adf5cb46",
+        "filename": "src/index.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-04-02T19:06:14Z",
+      "side": 1,
+      "message": "If you replace for `console.error(msg, logFileMessage);` the messages will not have an extra line break between them. Looking like: \n\n[Error]:\n\tAn error occured while cloning repository knot-cloud-storage \n        This is mostly caused when the repository is already installed[...]\n\nRather than:\n[Error]:\n\tAn error occured while cloning repository knot-cloud-storage \n//EXTRA LINE BREAK HERE!\n        This is mostly caused when the repository is already installed[...]\n\nIf the line break is intended, it\u0027s OK.",
+      "range": {
+        "startLine": 34,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 32
+      },
+      "revId": "eebfe5fc93edf056bf42242243e9e664ad0ee7db",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
