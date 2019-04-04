@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cae2bd9d_8833f02b",
+        "filename": "README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2019-04-04T13:10:47Z",
+      "side": 1,
+      "message": "`npm install -g` without the flag `-g` the developer with have to run binary using `npx knot-cloud init \u003cpath\u003e`",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 11
+      },
+      "revId": "47db25a05fc05f3713dcc9a533f46fbdbfd0d947",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d708c06_37f0bab2",
+        "filename": "README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2019-04-04T13:10:47Z",
+      "side": 1,
+      "message": "Use `[path]` instead of `\u003cpath\u003e`. Which means that the path is optional and will init the stack in current directory as default",
+      "range": {
+        "startLine": 24,
+        "startChar": 16,
+        "endLine": 24,
+        "endChar": 22
+      },
+      "revId": "47db25a05fc05f3713dcc9a533f46fbdbfd0d947",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b011892d_26550df3",
+        "filename": "README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2019-04-04T13:10:47Z",
+      "side": 1,
+      "message": "Put that developer can run the binary locally if he/she runs `npx knot-cloud init \u003cpath\u003e`",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 22
+      },
+      "revId": "47db25a05fc05f3713dcc9a533f46fbdbfd0d947",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
