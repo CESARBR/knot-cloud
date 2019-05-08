@@ -24,11 +24,21 @@ On Windows, the hosts file is usually located under `c:\Windows\System32\Drivers
 Notice that when deploying KNoT Cloud locally, most of the times the `<your-domain>` subdomains in the following sections should be disregarded. For instance, you would access your KNoT Cloud at `https://www` after deploy.
 
 ## Create development environment
+
 The knot-cloud CLI clone all the necessary KNoT repositories and create the files used by docker stack.
 
 ### Install CLI tool
+
+```bash
+$ npm install
+$ npm run build
+$ npm link
 ```
-npm install && npm run build && npm link
+
+Depending on npm configurations, it might be necessary to run `npm link` with super user privileges.
+
+```bash
+$ sudo npm link
 ```
 
 ### Run
