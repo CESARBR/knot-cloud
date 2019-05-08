@@ -3,8 +3,6 @@
 KNoT Cloud Docker stack.
 
 Stacks for development and production are provided in order to assist the user needs. Regardless of running in production or development, check the [local deployment considerations](#local-deployment-considerations) if it applies to your scenario.
-If you are running in production mode, go ahead to [configure and deploy your stack](#stage-1).
-For development, a command line interface (CLI) is provided to properly configure the environment necessary.
 
 ## Local deployment considerations
 
@@ -23,12 +21,35 @@ On Windows, the hosts file is usually located under `c:\Windows\System32\Drivers
 
 Notice that when deploying KNoT Cloud locally, most of the times the `<your-domain>` subdomains in the following sections should be disregarded. For instance, you would access your KNoT Cloud at `https://www` after deploy.
 
+## Install KNoT Cloud
+
+The provided stacks and CLI are contained in this repository and not yet published in any package manager. To complete this tutorial, it is necessary that you clone the repository or download the `.zip` containing all the files.
+
+```
+$ git clone https://github.com/CESARBR/knot-cloud.git
+```
+
+The following instructions always assume you are in the directory created after cloning the repository. If you downloaded the `.zip`, navigate to the appropriate folder.
+
+If you are running in production mode, go ahead to [configure and deploy your stack](#stage-1).
+For development, a command line interface (CLI) is provided to properly configure the environment necessary.
+
 ## Create development environment
+
 The knot-cloud CLI clone all the necessary KNoT repositories and create the files used by docker stack.
 
 ### Install CLI tool
+
+```bash
+$ npm install
+$ npm run build
+$ npm link
 ```
-npm install && npm run build && npm link
+
+Depending on npm configurations, it might be necessary to run `npm link` with super user privileges.
+
+```bash
+$ sudo npm link
 ```
 
 ### Run
