@@ -10,6 +10,19 @@ For development, a command line interface (CLI) is provided to properly configur
 
 This stack uses [Traefik](https://traefik.io) as a reverse proxy for the services in the stack. If you are running this stack locally, might want to configure a test domain in your machine before proceeding.
 
+You can setup a local DNS server using [bind9](https://wiki.debian.org/Bind9) or similar. Alternatively, you can update your hosts file to include the following addresses:
+
+```
+127.0.0.1	www
+127.0.0.1	ws
+127.0.0.1	auth
+127.0.0.1	bootstrap
+```
+
+On Windows, the hosts file is usually located under `c:\Windows\System32\Drivers\etc\hosts`. On Unix systems, it is commonly found at `/etc/hosts`. Regardless of you operating system, administrator or super user privileges will be required.
+
+Notice that when deploying KNoT Cloud locally, most of the times the `<your-domain>` subdomains in the following sections should be disregarded. For instance, you would access your KNoT Cloud at `https://www` after deploy.
+
 ## Create development environment
 The knot-cloud CLI clone all the necessary KNoT repositories and create the files used by docker stack.
 
@@ -148,3 +161,6 @@ Deploy the stage 2 services
 ```
 docker stack deploy -c stage-2.yml knot-cloud
 ```
+### Access
+
+Access KNoT Cloud in your browser at `https://www.<your-domain>`.
