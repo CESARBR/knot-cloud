@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0b2decb_230bae79",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2019-05-13T12:43:10Z",
+      "side": 1,
+      "message": "What do you think about to tell the user to clone this repository `knot-cloud` ?\nI just comment this because in `knot-cloud-websocket` we don\u0027t need to clone the repository because it\u0027s already posted on npm. \nOr will we post the knot-cloud on npm too?",
+      "revId": "f23d9bb38f9b462b87e12026edc974db4afb4c8e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
