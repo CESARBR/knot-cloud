@@ -16,6 +16,24 @@
       "revId": "f23d9bb38f9b462b87e12026edc974db4afb4c8e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bc71318_e85bb55e",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-05-15T12:20:07Z",
+      "side": 1,
+      "message": "Agree. \nAs a matter of fact, regardless of being a development or production, it is necessary to clone the repository. With that in mind, I wouldn\u0027t state this here, but however create a new section \n`Install KNoT Cloud`, what do you think?",
+      "parentUuid": "d0b2decb_230bae79",
+      "revId": "f23d9bb38f9b462b87e12026edc974db4afb4c8e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
