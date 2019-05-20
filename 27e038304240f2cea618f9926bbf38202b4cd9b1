@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79433177_4e68f4bd",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-05-20T16:14:09Z",
+      "side": 1,
+      "message": "Point to the official docs: https://docs.docker.com/install/overview/\n\nThe user might be using Windows, Mac or a Linux distro other than Ubuntu.",
+      "range": {
+        "startLine": 11,
+        "startChar": 11,
+        "endLine": 11,
+        "endChar": 105
+      },
+      "revId": "27e038304240f2cea618f9926bbf38202b4cd9b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
