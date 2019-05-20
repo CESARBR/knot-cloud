@@ -4,6 +4,12 @@ KNoT Cloud Docker stack.
 
 Stacks for development and production are provided in order to assist the user needs. Regardless of running in production or development, check the [local deployment considerations](#local-deployment-considerations) if it applies to your scenario.
 
+## Dependencies
+
+- [nvm](https://github.com/nvm-sh/nvm)(CLI only)
+	- Tested using node 10 and 11.
+- [docker](https://docs.docker.com/install/overview/)
+
 ## Local deployment considerations
 
 This stack uses [Traefik](https://traefik.io) as a reverse proxy for the services in the stack. If you are running this stack locally, might want to configure a test domain in your machine before proceeding.
