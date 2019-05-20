@@ -62,6 +62,8 @@ Now you can proceed to configure the necessary files to run KNoT Cloud, they wil
 
 ## Stage 1
 
+If you are running in production mode, your environment variables files wil be under `stacks/prod/env.d`. For development, they are under `<path>/stack/env.d`.
+
 ### Configure
 
 Create, if you already don't have, a private/public key pair:
@@ -85,9 +87,9 @@ openssl rand -hex 16
 ```
 
 Finally, set `TOKEN`, `PRIVATE_KEY_BASE64` and `PUBLIC_KEY_BASE64` to the values above in:
-- `./env.d/meshblu-core-dispatcher.env`
-- `./env.d/meshblu-core-worker-webhook.env`
-- `./env.d/knot-cloud-storage.env`
+- `meshblu-core-dispatcher.env`
+- `meshblu-core-worker-webhook.env`
+- `knot-cloud-storage.env`
 
 ### Deploy
 
@@ -145,7 +147,7 @@ docker service rm <bootstrap-service-name>
 
 ### Configure
 
-Get the authenticator's UUID and token from the bootstrap output and set `AUTHENTICATOR_UUID` and `AUTHENTICATOR_TOKEN` variables in `./env.d/knot-cloud-authenticator.env`.
+Get the authenticator's UUID and token from the bootstrap output and set `AUTHENTICATOR_UUID` and `AUTHENTICATOR_TOKEN` variables in `knot-cloud-authenticator.env`.
 
 #### Configure mail service
 KNoT Cloud supports several mail services and is built in such a modular fashion that it is rather trivial to include a new one. Deploying KNoT Cloud without a mail service is also allowed, although not recommended other than for testing purposes.
@@ -172,8 +174,12 @@ The supported mail services and related environment variables are:
     **If you are running KNoT Cloud on AWS EC2 that is using [roles to grant permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html), it is not necessary to set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`. The role attached to the EC2 instance must include a policy that allows `ses:SendEmail` actions at least on the domain used to send the reset e-mail (see `RESET_SENDER_ADDRESS` below).**
     For more information on AWS SES policies, refer to their [documentation](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/control-user-access.html).
 
+#### Configure reset address
+
 Set `RESET_SENDER_ADDRESS` with the e-mail address that will send the reset password e-mails.
 If this stack is being deployed on an accessible domain, replaced `RESET_URI` with **http://&lt;your-domain&gt;/reset**. This is the reset password address that is going to be sent by e-mail.
+
+This is a **required** option, but you could fill using a bogus e-mail address if it will not be used or you have set the mail service to `NONE`.
 
 ### Deploy
 
