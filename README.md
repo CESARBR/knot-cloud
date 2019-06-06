@@ -2,13 +2,55 @@
 
 KNoT Cloud Docker stack.
 
-Stacks for development and production are provided in order to assist the user needs. Regardless of running in production or development, check the [local deployment considerations](#local-deployment-considerations) if it applies to your scenario.
+## Installation and usage
 
-## Local deployment considerations
+Stacks for development and production environments are provided in order to assist the user's needs. The development stack must be used if one needs to modify any of the components of the stack. A command line tool will download the source for each component and plug it into the containers, which all have _hot reload_ enabled. The production stack must be used in all other cases.
 
-This stack uses [Traefik](https://traefik.io) as a reverse proxy for the services in the stack. If you are running this stack locally, might want to configure a test domain in your machine before proceeding.
+### Download
 
-You can setup a local DNS server using [bind9](https://wiki.debian.org/Bind9) or similar. Alternatively, you can update your hosts file to include the following addresses:
+The provided stacks and CLI contained in this repository aren't yet published in any package manager, hence it is necessary that you clone the repository or download the `.zip` containing all the files.
+
+```bash
+git clone https://github.com/CESARBR/knot-cloud.git
+```
+
+The following instructions always assume you are in the directory created after cloning the repository. If you downloaded the `.zip`, navigate to the appropriate folder.
+
+### Development only preparation
+
+If you intend to use the development stack, a command line tool that downloads and configures the stack is required.
+
+#### Build and install CLI tool
+
+The tool is built and installed as follows:
+
+```bash
+npm install
+npm run build
+npm link
+```
+
+Depending on npm configurations, it might be necessary to run `npm link` with super user privileges.
+
+```bash
+sudo npm link
+```
+
+#### Create the stack
+
+Choose a `<path>` where the stack should be created (defaults to current directory) and then run:
+
+```bash
+knot-cloud init [path]
+```
+
+The source code and stack template files will be created under `<path>/stack`.
+
+### Configure DNS
+
+This stack uses [Traefik](https://traefik.io) as a reverse proxy for the services and requires that you configure your DNS server to point, at least, the **www**, **ws**, **auth** and **bootstrap** subdomains to the machine where the stack is being deployed, so that it can route the requests to the appropriated service. It is possible to configure it to route by path or port, but instructions for that won't be provided here for brevity.
+
+If you don't have a domain or can't configure the main DNS server, you can configure a test domain in your machine before proceeding. Either setup a local DNS server, e.g. [bind9](https://wiki.debian.org/Bind9), or alternatively update your hosts file to include the following addresses:
 
 ```
 127.0.0.1	www
@@ -21,68 +63,29 @@ On Windows, the hosts file is usually located under `c:\Windows\System32\Drivers
 
 Notice that when deploying KNoT Cloud locally, most of the times the `<your-domain>` subdomains in the following sections should be disregarded. For instance, you would access your KNoT Cloud at `https://www` after deploy.
 
-## Install KNoT Cloud
+### Deploy: stage 1
 
-The provided stacks and CLI are contained in this repository and not yet published in any package manager. To complete this tutorial, it is necessary that you clone the repository or download the `.zip` containing all the files.
+Stage 1 contains the core services. The next sections provide the instructions to configure and deploy them. Whenever a configuration file is mentioned, it refers to a file found at `stacks/prod/env.d`, for production mode, or `<path>/stack/dev/env.d`, for development mode.
 
-```
-$ git clone https://github.com/CESARBR/knot-cloud.git
-```
-
-The following instructions always assume you are in the directory created after cloning the repository. If you downloaded the `.zip`, navigate to the appropriate folder.
-
-If you are running in production mode, go ahead to [configure and deploy your stack](#stage-1).
-For development, a command line interface (CLI) is provided to properly configure the environment necessary.
-
-## Create development environment
-
-The knot-cloud CLI clone all the necessary KNoT repositories and create the files used by docker stack.
-
-### Install CLI tool
-
-```bash
-$ npm install
-$ npm run build
-$ npm link
-```
-
-Depending on npm configurations, it might be necessary to run `npm link` with super user privileges.
-
-```bash
-$ sudo npm link
-```
-
-### Run
-Define the `<path>` where the stack should be created. Defaults to current directory.
-```
-knot-cloud init [path]
-```
-
-Now you can proceed to configure the necessary files to run KNoT Cloud, they will be under `<path>/stack`.
-
-## Stage 1
-
-If you are running in production mode, your environment variables files wil be under `stacks/prod/env.d`. For development, they are under `<path>/stack/env.d`.
-
-### Configure
+#### Configure services
 
 Create, if you already don't have, a private/public key pair:
 
-```
+```bash
 openssl genpkey -algorithm RSA -out privateKey.pem -pkeyopt rsa_keygen_bits:2048
 openssl rsa -pubout -in privateKey.pem -out publicKey.pem
 ```
 
 Then, convert the keys to base 64:
 
-```
+```bash
 base64 < privateKey.pem
 base64 < publicKey.pem
 ```
 
 And generate a 16-bit random value in hexadecimal format:
 
-```
+```bash
 openssl rand -hex 16
 ```
 
@@ -91,39 +94,49 @@ Finally, set `TOKEN`, `PRIVATE_KEY_BASE64` and `PUBLIC_KEY_BASE64` to the values
 - `meshblu-core-worker-webhook.env`
 - `knot-cloud-storage.env`
 
-### Deploy
+#### Deploy
 
 Deploy the stage 1 services:
 
-```
+```bash
 docker stack deploy -c stage-1.yml knot-cloud
 ```
 
-## Stage 2
+#### Verify
 
-### Bootstrap
+Wait until all the services are started. You can check it by running:
+
+```bash
+docker stack services knot-cloud
+```
+
+And verifying that every service has one replica.
+
+### Deploy: stage 2 bootstrap
+
+Before bringing the stage 2 services up, a bootstrap process must be executed in the stage 1 services. The next sections provide the instructions to execute this process.
 
 #### Deploy
 
 Deploy the stage 2 bootstrap services:
 
-```
+```bash
 docker stack deploy -c stage-2-bootstrap.yml knot-cloud
 ```
 
 Wait until the bootstrap service is responsive, when the following command should succeed:
 
-```
+```bash
 curl https://bootstrap.<your domain>/healthcheck
 ```
 
 **Note:** If the HTTPS certificates are not configured locally, traefik has a default certificate that is used in such cases. To use traefik's default certificate, it is necessary to add `-k` parameter to the `curl` command otherwise the request will fail.
 
-#### Execute
+#### Bootstrap
 
 Once the services are started, run the bootstrap process:
 
-```
+```bash
 curl -X POST https://bootstrap.<your domain>/bootstrap
 ```
 
@@ -135,21 +148,25 @@ Save the output for the next steps.
 
 List the stack services:
 
-```
+```bash
 docker stack services knot-cloud
 ```
 
-Remove the bootstrap service (get the name from the list above):
+Remove the bootstrap service (get the name from the list above, probably will be `knot-cloud_boostrap`):
 
-```
+```bash
 docker service rm <bootstrap-service-name>
 ```
 
-### Configure
+### Deploy: stage 2
+
+The stage 2 is the last stage, in which the user authentication service and the configuration UI are started. The next sections provide the instructions to configure and deploy them.
+
+#### Configure services
 
 Get the authenticator's UUID and token from the bootstrap output and set `AUTHENTICATOR_UUID` and `AUTHENTICATOR_TOKEN` variables in `knot-cloud-authenticator.env`.
 
-#### Configure mail service
+##### Configure mail service
 KNoT Cloud supports several mail services and is built in such a modular fashion that it is rather trivial to include a new one. Deploying KNoT Cloud without a mail service is also allowed, although not recommended other than for testing purposes.
 The supported mail services and related environment variables are:
 - Disable mail service
@@ -174,20 +191,21 @@ The supported mail services and related environment variables are:
     **If you are running KNoT Cloud on AWS EC2 that is using [roles to grant permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html), it is not necessary to set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`. The role attached to the EC2 instance must include a policy that allows `ses:SendEmail` actions at least on the domain used to send the reset e-mail (see `RESET_SENDER_ADDRESS` below).**
     For more information on AWS SES policies, refer to their [documentation](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/control-user-access.html).
 
-#### Configure reset address
+##### Configure reset address
 
 Set `RESET_SENDER_ADDRESS` with the e-mail address that will send the reset password e-mails.
 If this stack is being deployed on an accessible domain, replaced `RESET_URI` with **http://&lt;your-domain&gt;/reset**. This is the reset password address that is going to be sent by e-mail.
 
 This is a **required** option, but you could fill using a bogus e-mail address if it will not be used or you have set the mail service to `NONE`.
 
-### Deploy
+#### Deploy
 
 Deploy the stage 2 services
 
-```
+```bash
 docker stack deploy -c stage-2.yml knot-cloud
 ```
-### Access
+
+#### Access
 
 Access KNoT Cloud in your browser at `https://www.<your-domain>`.
