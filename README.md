@@ -36,15 +36,31 @@ Depending on npm configurations, it might be necessary to run `npm link` with su
 sudo npm link
 ```
 
-#### Create the stack
+### Choose the stack
 
-Choose a `<path>` where the stack should be created (defaults to current directory) and then run:
+#### Development
+
+The development stack must be created using the tool described in the previous section. Choose a `<path>` where the stack should be created (defaults to current directory) and then run:
 
 ```bash
 knot-cloud init [path]
 ```
 
 The source code and stack template files will be created under `<path>/stack`.
+
+#### Production
+
+The production stack comes in two flavours: all-in-one and multinode. The former will deploy all the services on a single machine while the latter will deploy them in multiple nodes, at least two. The files for the two flavours are available at `stacks/prod`.
+
+### Initialize Swarm mode
+
+In your deployment machine, initialize Docker Swarm mode:
+
+```bash
+docker swarm init
+```
+
+In case you are deploying to multiple nodes, all the nodes must be connected to the same swarm. In this case, run the command above in the machine that must be the swarm manager and run `docker swarm join` in all other nodes, as instructed by the execution of `docker swarm init` in the manager machine. Check the [Docker Swarm](https://docs.docker.com/engine/swarm/) documentation for more on how to setup your cluster.
 
 ### Configure DNS
 

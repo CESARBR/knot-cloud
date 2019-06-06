@@ -1,0 +1,24 @@
+version: '3.7'
+services:
+  authenticator:
+    image: cesarbr/knot-cloud-authenticator:v1.3.0
+    env_file: '../env.d/knot-cloud-authenticator.env'
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
+      labels:
+        - traefik.enable=true
+        - traefik.frontend.rule=HostRegexp:auth,auth.{domain:[a-zA-Z0-9.]+}
+        - traefik.port=80
+  ui:
+    image: cesarbr/knot-cloud-ui:v1.0.1
+    env_file: '../env.d/knot-cloud-ui.env'
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
+      labels:
+        - traefik.enable=true
+        - traefik.frontend.rule=HostRegexp:www,www.{domain:[a-zA-Z0-9.]+}
+        - traefik.port=80
