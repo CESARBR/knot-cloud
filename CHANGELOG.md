@@ -1,3 +1,14 @@
+# [1.3.0 / KNOT-v02.00](https://github.com/CESARBR/knot-cloud/compare/v1.2.0...v1.3.0)
+
+### Features
+
+- Provide multinode and all-in-one production stacks
+
+### Bug Fixes
+
+- Copy stack files when `knot-cloud init` command is executed
+- Update packages to fix vulnerability issues
+
 # [1.2.0 / KNOT-v01.04-rc03](https://github.com/CESARBR/knot-cloud/compare/v1.1.0...v1.2.0)
 
 ### Features
