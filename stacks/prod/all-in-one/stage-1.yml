@@ -17,18 +17,18 @@ services:
     deploy:
       replicas: 1
   uuid-alias-service:
-    image: cesarbr/uuid-alias-service:v1.2.0
+    image: cesarbr/uuid-alias-service:v1.2.1
     env_file: '../env.d/uuid-alias-service.env'
     deploy:
       replicas: 1
   uuid-alias-lookup-service:
-    image: cesarbr/uuid-alias-lookup-service:v1.1.4
+    image: cesarbr/uuid-alias-lookup-service:v1.1.5
     env_file: '../env.d/uuid-alias-lookup-service.env'
     deploy:
       replicas: 1
   # KNoT Cloud
   protocol-adapter-websocket:
-    image: cesarbr/knot-cloud-protocol-adapter-websocket:v1.0.0
+    image: cesarbr/knot-cloud-protocol-adapter-websocket:v1.1.0
     env_file: '../env.d/knot-cloud-protocol-adapter-websocket.env'
     deploy:
       replicas: 1
@@ -37,7 +37,7 @@ services:
         - traefik.frontend.rule=HostRegexp:ws,ws.{domain:[a-zA-Z0-9.]+}
         - traefik.port=80
   storage:
-    image: cesarbr/knot-cloud-storage:v1.0.1
+    image: cesarbr/knot-cloud-storage:v1.0.2
     env_file: '../env.d/knot-cloud-storage.env'
     deploy:
       replicas: 1
