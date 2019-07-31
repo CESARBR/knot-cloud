@@ -4,6 +4,7 @@ import yargs from 'yargs';
 
 yargs // eslint-disable-line no-unused-expressions
   .commandDir('cmds/stack')
+  .commandDir('cmds/cloud')
   .demandCommand()
   .strict()
   .alias('h', 'help')
