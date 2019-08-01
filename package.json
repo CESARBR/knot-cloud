@@ -50,6 +50,7 @@
     "@cesarbr/knot-cloud-sdk-js": "^1.1.0",
     "fs-extra": "^7.0.1",
     "git-clone": "^0.1.0",
+    "is-base64": "^0.1.0",
     "yargs": "^13.3.0"
   }
 }
