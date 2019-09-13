@@ -1,3 +1,8 @@
+import os from 'os';
+import getFileCredentials from './getFileCredentials';
+
+const credentials = getFileCredentials(`${os.homedir()}/.knot/credentials.json`);
+
 export default {
   server: {
     describe: 'Server hostname',
@@ -22,10 +27,12 @@ export default {
   'client-id': {
     describe: 'Client ID',
     demandOption: true,
+    default: credentials['client-id'],
   },
   'client-token': {
     describe: 'Client token',
     demandOption: true,
+    default: credentials['client-token'],
   },
   'credentials-file': {
     describe: 'Credentials file',
