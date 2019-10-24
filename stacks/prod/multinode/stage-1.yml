@@ -76,7 +76,7 @@ services:
           memory: 300M
   # Proxy
   traefik:
-    image: traefik
+    image: traefik:v1.7
     command: >
       traefik
         --docker
