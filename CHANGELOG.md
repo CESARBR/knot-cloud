@@ -1,3 +1,24 @@
+# [1.4.0](https://github.com/CESARBR/knot-cloud/compare/v1.3.0...v1.4.0)
+
+### Features
+
+- Add CLI commands to operate on the cloud:
+  - Create thing
+  - Create gateway
+  - List devices
+  - Set data
+  - Get data
+  - Publish data
+  - Listen data
+  - Update schema
+  - Create session token
+  - Delete device
+
+### Bug Fixes
+
+- Update packages to fix vulnerability issues
+- Fix traefik version in v1.7
+
 # [1.3.0 / KNOT-v02.00](https://github.com/CESARBR/knot-cloud/compare/v1.2.0...v1.3.0)
 
 ### Features

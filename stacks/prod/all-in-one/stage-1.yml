@@ -37,7 +37,7 @@ services:
         - traefik.frontend.rule=HostRegexp:ws,ws.{domain:[a-zA-Z0-9.]+}
         - traefik.port=80
   storage:
-    image: cesarbr/knot-cloud-storage:v1.0.2
+    image: cesarbr/knot-cloud-storage:v1.0.3
     env_file: '../env.d/knot-cloud-storage.env'
     deploy:
       replicas: 1
