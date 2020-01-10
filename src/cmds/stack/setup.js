@@ -49,12 +49,14 @@ const cpDevDir = (basePath) => {
 };
 
 const initStack = (args) => {
+  const initPath = args.path || '';
+
   if (fs.existsSync(KNOT_ERR_PATH)) {
     fs.unlinkSync(KNOT_ERR_PATH);
   }
   REPOSITORIES.forEach((repo) => {
     const repoName = repo.split('/')[1];
-    const repoPath = `${args.path}/${repoName}`;
+    const repoPath = path.join(initPath, repoName);
     console.log(`Cloning: ${repoName}`);
     gitClone(
       `http://github.com/${repo}`,
@@ -69,7 +71,7 @@ const initStack = (args) => {
       },
     );
   });
-  cpDevDir(args.path);
+  cpDevDir(initPath);
 };
 
 yargs // eslint-disable-line import/no-extraneous-dependencies
