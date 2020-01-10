@@ -40,7 +40,7 @@ const cpDevDir = (basePath) => {
       fs.removeSync(stackDir);
     }
     fs.ensureDirSync(stackDir);
-    fs.copySync(`${__dirname}/stacks/dev`, stackDir);
+    fs.copySync(`${__dirname}/../../stacks/dev`, stackDir);
     console.log('Created development stack files');
   } catch (err) {
     const msg = '[Error]:\n\tAn error occurred while copying the development stack files.';
