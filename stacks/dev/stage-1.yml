@@ -50,7 +50,7 @@ services:
       labels:
         - traefik.enable=true
         - traefik.frontend.rule=HostRegexp:data,data.{domain:[a-zA-Z0-9.]+}
-        - traefik.port=80
+        - traefik.port=8080
   # Storage
   mongo:
     image: mongo
