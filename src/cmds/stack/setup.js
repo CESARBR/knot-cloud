@@ -14,6 +14,7 @@ const KNOT_CLOUD_REPOSITORIES = [
 
 const KNOT_CLOUD_CORE_REPOSITORIES = [
   'CESARBR/knot-babeltower',
+  'CESARBR/knot-cloud-storage:migration_golang',
 ];
 
 const KNOT_ERR_FILE = 'knot.err';
@@ -53,13 +54,15 @@ const cpDevDir = (basePath, version) => {
 };
 
 const cloneRepositories = (initPath, repositories) => {
-  repositories.forEach((repo) => {
+  repositories.forEach((fullRepo) => {
+    const [repo, branch] = fullRepo.split(':');
     const repoName = repo.split('/')[1];
     const repoPath = path.join(initPath, repoName);
     console.log(`Cloning: ${repoName}`);
     gitClone(
       `http://github.com/${repo}`,
       repoPath,
+      { checkout: branch },
       (err) => {
         if (err) {
           const msg = `[Error]:\n\tAn error occured while cloning repository ${repoName}`;
@@ -84,6 +87,9 @@ const initStack = (args) => {
     cloneRepositories(initPath, KNOT_CLOUD_REPOSITORIES);
   } else if (version === 'core') {
     cloneRepositories(initPath, KNOT_CLOUD_CORE_REPOSITORIES);
+  } else {
+    console.log('Invalid cloud version selected. Please type \'cloud\' or \'core\'');
+    return;
   }
 
   cpDevDir(initPath, version);

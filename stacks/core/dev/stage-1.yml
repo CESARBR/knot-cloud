@@ -41,6 +41,20 @@ services:
         - traefik.port=8183
 
   # KNoT Fog Core
+  storage:
+    image: cesarbr/knot-cloud-storage-go:dev
+    env_file: './env.d/knot-cloud-storage.env'
+    volumes:
+      - ../knot-cloud-storage:/usr/src/app
+    depends_on:
+      - mongo
+    deploy:
+      replicas: 1
+      labels:
+        - traefik.enable=true
+        - traefik.frontend.rule=HostRegexp:storage,storage.{domain:[a-zA-Z0-9.]+}
+        - traefik.port=8181
+
   babeltower:
     image: cesarbr/knot-babeltower:dev
     env_file: './env.d/knot-babeltower.env'
@@ -90,6 +104,15 @@ services:
     volumes:
       - mainflux-authn-db-volume:/var/lib/postgresql/data
 
+  mongo:
+    image: mongo
+    volumes:
+      - knot-cloud-db-volume:/var/lib/mongo/data
+    deploy:
+      resources:
+        limits:
+          memory: 300M
+
   rabbitmq:
     image: rabbitmq:management
     env_file: './env.d/rabbitmq.env'
@@ -128,3 +151,4 @@ volumes:
   mainflux-things-db-volume:
   mainflux-users-db-volume:
   mainflux-authn-db-volume:
+  knot-cloud-db-volume:
