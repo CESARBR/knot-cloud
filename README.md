@@ -69,14 +69,14 @@ In case you are deploying to multiple nodes, all the nodes must be connected to 
 
 After this point, follow the specific instructions to configure and deploy the created stack:
 
-- [Steps for deploying the cloud services](./stacks/knot-cloud/README.md)
-- [Steps for deploying the core services](./stacks/knot-cloud-core/README.md)
+- [Steps for deploying the cloud services](./stacks/cloud/README.md)
+- [Steps for deploying the core services](./stacks/core/README.md)
 
 ### Tear Down
 
 If you want to stop your stack from running or even leave the Docker Swarm mode, execute the commands below:
 
-`docker stack rm <knot-cloud|knot-cloud-stack>`
+`docker stack rm <knot-cloud|knot-cloud-core>`
 
 and
 
