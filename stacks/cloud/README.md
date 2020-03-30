@@ -58,13 +58,11 @@ docker stack deploy -c stage-1.yml knot-cloud
 
 #### Verify
 
-Wait until all the services are started. You can check it by running:
+Check if all services are running and have exactly one replica:
 
 ```bash
 docker stack services knot-cloud
 ```
-
-And verifying that every service has one replica.
 
 ### Deploy: stage 2 bootstrap
 
