@@ -37,7 +37,7 @@ function handleError(err, msg, logFileMessage) {
   fs.writeFileSync(KNOT_ERR_PATH, `${err.stack}\n`, { flag: 'a', encoding: 'utf-8' });
 }
 
-const cpDevDir = (basePath, version) => {
+const cpEnvDir = (basePath, version, env) => {
   const stackDir = path.join(basePath, 'stack');
 
   try {
@@ -45,10 +45,10 @@ const cpDevDir = (basePath, version) => {
       fs.removeSync(stackDir);
     }
     fs.ensureDirSync(stackDir);
-    fs.copySync(`${__dirname}/../../stacks/${version}/dev`, stackDir);
-    console.log('Created development stack files');
+    fs.copySync(`${__dirname}/../../stacks/${version}/${env}`, stackDir);
+    console.log(`Created ${env} stack files`);
   } catch (err) {
-    const msg = '[Error]:\n\tAn error occurred while copying the development stack files.';
+    const msg = `[Error]:\n\tAn error occurred while copying the ${env} stack files.`;
     handleError(err, msg, logFileMessageCopyStack);
   }
 };
@@ -78,6 +78,7 @@ const cloneRepositories = (initPath, repositories) => {
 const initStack = (args) => {
   const initPath = args.path || '';
   const version = args.cloudVersion || 'cloud';
+  const env = args.env || 'dev';
 
   if (fs.existsSync(KNOT_ERR_PATH)) {
     fs.unlinkSync(KNOT_ERR_PATH);
@@ -92,13 +93,17 @@ const initStack = (args) => {
     return;
   }
 
-  cpDevDir(initPath, version);
+  if (env === 'dev' || env === 'prod') {
+    cpEnvDir(initPath, version, env);
+  } else {
+    console.log('Invalid stack environment selected. Please type \'dev\' or \'prod\'');
+  }
 };
 
 yargs // eslint-disable-line import/no-extraneous-dependencies
   .command({
-    command: 'init [cloudVersion] [path]',
-    desc: 'Initialize [cloudVersion] stack at [path]',
+    command: 'init [cloudVersion] [env] [path]',
+    desc: 'Initialize [cloudVersion] [env] stack at [path]',
     handler: (args) => {
       initStack(args);
     },
