@@ -1,0 +1,165 @@
+version: '3.7'
+
+services:
+  # Mainflux services
+  users:
+    image: mainflux/users:0.10.0
+    env_file: '../env.d/mainflux-users.env'
+    depends_on:
+      - users-db
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
+      labels:
+        - traefik.enable=true
+        - traefik.frontend.rule=HostRegexp:users,users.{domain:[a-zA-Z0-9.]+}
+        - traefik.port=8180
+
+  things:
+    image: mainflux/things:0.10.0
+    env_file: '../env.d/mainflux-things.env'
+    depends_on:
+      - things-db
+      - users
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
+      labels:
+        - traefik.enable=true
+        - traefik.frontend.rule=HostRegexp:things,things.{domain:[a-zA-Z0-9.]+}
+        - traefik.port=8182
+
+  authn:
+    image: mainflux/authn:0.10.0
+    env_file: '../env.d/mainflux-authn.env'
+    depends_on:
+      - authn-db
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
+      labels:
+        - traefik.enable=true
+        - traefik.frontend.rule=HostRegexp:authn,authn.{domain:[a-zA-Z0-9.]+}
+        - traefik.port=8183
+
+  # KNoT Fog Core
+  # Use the Go version of cesarbr/knot-cloud-storage
+  storage:
+    image: cesarbr/knot-cloud-storage:dev-go
+    env_file: '../env.d/knot-cloud-storage.env'
+    depends_on:
+      - mongo
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
+      labels:
+        - traefik.enable=true
+        - traefik.frontend.rule=HostRegexp:storage,storage.{domain:[a-zA-Z0-9.]+}
+        - traefik.port=8181
+  babeltower:
+    image: cesarbr/knot-babeltower
+    env_file: '../env.d/knot-babeltower.env'
+    depends_on:
+      - rabbitmq
+      - users
+      - things
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
+      labels:
+        - traefik.enable=true
+        - traefik.frontend.rule=HostRegexp:bt,bt.{domain:[a-zA-Z0-9.]+}
+        - traefik.port=80
+
+  # External dependencies: database, tracing, message broker, load balancer.
+  things-redis:
+    image: redis:5.0-alpine
+    deploy:
+      resources:
+        limits:
+          memory: 300M
+
+  es-redis:
+    image: redis:5.0-alpine
+    deploy:
+      resources:
+        limits:
+          memory: 300M
+
+  things-db:
+    image: postgres:9.6.17-alpine
+    env_file: '../env.d/mainflux-things.env'
+    volumes:
+      - mainflux-things-db-volume:/var/lib/postgresql/data
+
+  users-db:
+    image: postgres:9.6.17-alpine
+    env_file: '../env.d/mainflux-users.env'
+    volumes:
+      - mainflux-users-db-volume:/var/lib/postgresql/data
+
+  authn-db:
+    image: postgres:9.6.17-alpine
+    env_file: '../env.d/mainflux-authn.env'
+    volumes:
+      - mainflux-authn-db-volume:/var/lib/postgresql/data
+
+  mongo:
+    image: mongo
+    volumes:
+      - knot-cloud-db-volume:/var/lib/mongo/data
+    deploy:
+      resources:
+        limits:
+          memory: 300M
+
+  rabbitmq:
+    image: rabbitmq:management
+    env_file: '../env.d/rabbitmq.env'
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.13
+    env_file: '../env.d/mainflux-jaeger.env'
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
+
+  traefik:
+    image: traefik:v1.7
+    command: >
+      traefik
+        --docker
+        --docker.watch
+        --docker.swarmMode
+        --docker.exposedByDefault=false
+        --entryPoints='Name:http Address::80 Redirect.EntryPoint:https'
+        --entryPoints='Name:https Address::443 TLS'
+        --defaultEntryPoints=http,https
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.role == manager]
+
+volumes:
+  mainflux-things-db-volume:
+  mainflux-users-db-volume:
+  mainflux-authn-db-volume:
+  knot-cloud-db-volume:
