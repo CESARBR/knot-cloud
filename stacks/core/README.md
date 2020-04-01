@@ -9,7 +9,9 @@ If you don't have a domain or can't configure the main DNS server, you can confi
 ```
 127.0.0.1   things
 127.0.0.1   users
+127.0.0.1   authn
 127.0.0.1   bt
+127.0.0.1   storage
 ```
 
 On Windows, the hosts file is usually located under `c:\Windows\System32\Drivers\etc\hosts`. On Unix systems, it is commonly found at `/etc/hosts`. Regardless of you operating system, administrator or super user privileges will be required.
