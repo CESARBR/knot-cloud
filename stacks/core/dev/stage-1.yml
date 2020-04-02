@@ -42,7 +42,7 @@ services:
 
   # KNoT Fog Core
   storage:
-    image: cesarbr/knot-cloud-storage-go:dev
+    image: cesarbr/knot-cloud-storage:dev-go
     env_file: './env.d/knot-cloud-storage.env'
     volumes:
       - ../knot-cloud-storage:/usr/src/app
