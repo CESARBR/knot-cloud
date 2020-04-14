@@ -12,8 +12,9 @@ services:
       replicas: 1
       labels:
         - traefik.enable=true
-        - traefik.frontend.rule=HostRegexp:users,users.{domain:[a-zA-Z0-9.]+}
-        - traefik.port=8180
+        - traefik.http.services.users.loadbalancer.server.port=8180
+        - traefik.http.routers.users.rule=HostRegexp(`{subdomain:users}.{domain:[a-zA-Z0-9.]+}`)
+        - traefik.http.routers.users.entrypoints=http
 
   things:
     image: mainflux/things:0.10.0
@@ -25,8 +26,9 @@ services:
       replicas: 1
       labels:
         - traefik.enable=true
-        - traefik.frontend.rule=HostRegexp:things,things.{domain:[a-zA-Z0-9.]+}
-        - traefik.port=8182
+        - traefik.http.services.things.loadbalancer.server.port=8182
+        - traefik.http.routers.things.rule=HostRegexp(`{subdomain:things}.{domain:[a-zA-Z0-9.]+}`)
+        - traefik.http.routers.things.entrypoints=http
 
   authn:
     image: mainflux/authn:0.10.0
@@ -37,8 +39,9 @@ services:
       replicas: 1
       labels:
         - traefik.enable=true
-        - traefik.frontend.rule=HostRegexp:authn,authn.{domain:[a-zA-Z0-9.]+}
-        - traefik.port=8183
+        - traefik.http.services.authn.loadbalancer.server.port=8183
+        - traefik.http.routers.authn.rule=HostRegexp(`{subdomain:authn}.{domain:[a-zA-Z0-9.]+}`)
+        - traefik.http.routers.authn.entrypoints=http
 
   # KNoT Fog Core
   storage:
@@ -52,8 +55,9 @@ services:
       replicas: 1
       labels:
         - traefik.enable=true
-        - traefik.frontend.rule=HostRegexp:storage,storage.{domain:[a-zA-Z0-9.]+}
-        - traefik.port=8181
+        - traefik.http.services.storage.loadbalancer.server.port=8181
+        - traefik.http.routers.storage.rule=HostRegexp(`{subdomain:storage}.{domain:[a-zA-Z0-9.]+}`)
+        - traefik.http.routers.storage.entrypoints=http
 
   babeltower:
     image: cesarbr/knot-babeltower:dev
@@ -68,8 +72,9 @@ services:
       replicas: 1
       labels:
         - traefik.enable=true
-        - traefik.frontend.rule=HostRegexp:bt,bt.{domain:[a-zA-Z0-9.]+}
-        - traefik.port=8080
+        - traefik.http.services.babeltower.loadbalancer.server.port=8080
+        - traefik.http.routers.babeltower.rule=HostRegexp(`{subdomain:api}.{domain:[a-zA-Z0-9.]+}`)
+        - traefik.http.routers.babeltower.entrypoints=http
 
   # External dependencies: database, tracing, message broker, load balancer.
   things-redis:
@@ -118,9 +123,16 @@ services:
     env_file: './env.d/rabbitmq.env'
     deploy:
       replicas: 1
-    ports:
-      - 5672:5672
-      - 15672:15672
+      labels:
+        - traefik.enable=true
+        # Management dashboard configuration
+        - traefik.http.services.rabbitmq-admin.loadbalancer.server.port=15672
+        - traefik.http.routers.rabbitmq-admin.rule=HostRegexp(`{subdomain:admin}.{domain:[a-zA-Z0-9.]+}`)
+        - traefik.http.routers.rabbitmq-admin.entrypoints=management
+        # AMQP configuration
+        - traefik.tcp.services.rabbitmq.loadbalancer.server.port=5672
+        - traefik.tcp.routers.rabbitmq.rule=HostSNI(`*`)
+        - traefik.tcp.routers.rabbitmq.entrypoints=broker
 
   jaeger:
     image: jaegertracing/all-in-one:1.13
@@ -129,19 +141,20 @@ services:
       replicas: 1
 
   traefik:
-    image: traefik:v1.7
+    image: traefik:v2.2
     command: >
       traefik
-        --docker
-        --docker.watch
-        --docker.swarmMode
-        --docker.exposedByDefault=false
-        --entryPoints='Name:http Address::80 Redirect.EntryPoint:https'
-        --entryPoints='Name:https Address::443 TLS'
-        --defaultEntryPoints=http,https
+        --providers.docker
+        --providers.docker.watch
+        --providers.docker.swarmMode
+        --providers.docker.exposedByDefault=false
+        --entrypoints.http.address=:80
+        --entrypoints.management.address=:15672
+        --entrypoints.broker.address=:5672
     ports:
       - '80:80'
-      - '443:443'
+      - '5672:5672'
+      - '15672:15672'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     deploy:
