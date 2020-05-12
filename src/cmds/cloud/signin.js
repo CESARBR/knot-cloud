@@ -13,11 +13,11 @@ const askCredentials = () => {
   const schema = {
     properties: {
       email: {
-        description: 'Enter your e-mail:',
+        description: 'enter your e-mail:',
         required: true,
       },
       password: {
-        description: 'Enter your password:',
+        description: 'enter your password:',
         hidden: true,
         required: true,
       },
@@ -39,15 +39,15 @@ const login = async (config) => {
   });
 
   try {
-    const credentials = await client.authUser(email, password);
+    const credentials = await client.createToken(email, password);
     const credentialsLocation = `${os.homedir()}/.knot/credentials.json`;
     fse.outputFileSync(credentialsLocation, JSON.stringify(credentials, null, 2));
-    console.log(colors.cyan(`You have been successfully logged in.\nCredentials saved in ${credentialsLocation}`));
+    console.log(colors.cyan(`you have been successfully logged in\ncredentials saved in ${credentialsLocation}`));
   } catch (err) {
-    if (err.response.status === 401) {
-      console.log(colors.red('Authentication failed. Please, try again.'));
-    } else if (err.response.status === 400) {
-      console.log(colors.red('Bad request. Verify the e-mail format.'));
+    if (err.code === 403) {
+      console.log(colors.red('authentication failed, try again'));
+    } else if (err.code === 400) {
+      console.log(colors.red('bad request, verify e-mail and password formats'));
     }
   }
 };
@@ -62,7 +62,7 @@ yargs
           server: {
             describe: 'Server hostname',
             demandOption: true,
-            default: 'auth.knot.cloud',
+            default: 'api.knot.cloud',
           },
           protocol: {
             describe: 'Server protocol',
