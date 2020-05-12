@@ -24,15 +24,10 @@ export default {
     demandOption: false,
     default: '/ws',
   },
-  'client-id': {
-    describe: 'Client ID',
-    demandOption: true,
-    default: credentials['client-id'],
-  },
-  'client-token': {
+  token: {
     describe: 'Client token',
     demandOption: true,
-    default: credentials['client-token'],
+    default: credentials.token,
   },
   'credentials-file': {
     describe: 'Credentials file',

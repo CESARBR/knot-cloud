@@ -8,8 +8,7 @@ const extractCredentials = (filePath) => {
   const rawData = fs.readFileSync(filePath);
   const credentials = JSON.parse(rawData);
   return {
-    'client-id': credentials.uuid ? credentials.uuid : credentials.knot.id,
-    'client-token': credentials.token,
+    token: credentials.token,
   };
 };
 
