@@ -19,10 +19,15 @@ export default {
     demandOption: true,
     default: 'wss',
   },
-  pathName: {
-    describe: 'Path name',
-    demandOption: false,
-    default: '/ws',
+  username: {
+    describe: 'RabbitMQ username',
+    demandOption: true,
+    default: 'knot',
+  },
+  password: {
+    describe: 'RabbitMQ password',
+    demandOption: true,
+    default: 'knot',
   },
   token: {
     describe: 'Client token',
