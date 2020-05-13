@@ -1,30 +1,23 @@
 /* eslint-disable no-console */
 import yargs from 'yargs';
+import chalk from 'chalk';
 import { Client } from '@cesarbr/knot-cloud-sdk-js';
 import options from './utils/options';
 import getFileCredentials from './utils/getFileCredentials';
 
-const getData = (args) => {
+const getData = async (args) => {
   const client = new Client({
-    protocol: args.protocol,
     hostname: args.server,
     port: args.port,
-    pathName: args.pathName,
-    id: args['client-id'],
-    token: args['client-token'],
+    protocol: args.protocol,
+    username: args.username,
+    password: args.password,
+    token: args.token,
   });
 
-  client.on('ready', () => {
-    client.getData(args['thing-id'], [args['sensor-id']]);
-  });
-  client.on('sent', () => {
-    client.close();
-  });
-  client.on('error', (err) => {
-    console.log(err);
-    console.log('Connection refused');
-  });
-  client.connect();
+  await client.connect();
+  await client.getData(args.thingId, [args.sensorId]);
+  await client.close();
 };
 
 yargs
@@ -42,7 +35,14 @@ yargs
           describe: 'ID of the sensor to request the data',
         });
     },
-    handler: (args) => {
-      getData(args);
+    handler: async (args) => {
+      try {
+        await getData(args);
+        console.log(chalk.green('data successfully requested'));
+        console.log(chalk.grey("subscribe to the 'data' event to receive the requested data"));
+      } catch (err) {
+        console.log(chalk.red('it was not possible to request the data :('));
+        console.log(chalk.red(err));
+      }
     },
   });
