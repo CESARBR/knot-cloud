@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import yargs from 'yargs';
 import fs from 'fs';
+import chalk from 'chalk';
 import { Client } from '@cesarbr/knot-cloud-sdk-js';
 import options from './utils/options';
 import getFileCredentials from './utils/getFileCredentials';
@@ -17,42 +18,34 @@ const getFileSchema = (filePath) => {
   };
 };
 
-const updateSchema = (args) => {
+const updateSchema = async (args) => {
   const client = new Client({
-    protocol: args.protocol,
     hostname: args.server,
     port: args.port,
-    pathName: args.pathName,
-    id: args['client-id'],
-    token: args['client-token'],
+    protocol: args.protocol,
+    username: args.username,
+    password: args.password,
+    token: args.token,
   });
 
-  client.on('ready', () => {
-    client.updateSchema([
-      {
-        sensorId: args['sensor-id'],
-        valueType: args['value-type'],
-        unit: args.unit,
-        typeId: args['type-id'],
-        name: args.name,
-      },
-    ]);
-  });
-  client.on('updated', () => {
-    client.close();
-  });
-  client.on('error', (err) => {
-    console.log(err);
-    console.log('Connection refused');
-  });
-  client.connect();
+  const schema = {
+    sensorId: args.sensorId,
+    valueType: args.valueType,
+    unit: args.unit,
+    typeId: args.typeId,
+    name: args.name,
+  };
+
+  await client.connect();
+  await client.updateSchema(args.thingId, [schema]);
+  await client.close();
 };
 
 yargs
   .config('credentials-file', path => getFileCredentials(path))
   .config('schema-file', path => getFileSchema(path))
   .command({
-    command: 'update-schema [sensor-id] [value-type] [unit] [type-id] [name]',
+    command: 'update-schema <thing-id> [sensor-id] [value-type] [unit] [type-id] [name]',
     desc: 'Update a thing schema',
     builder: (_yargs) => {
       _yargs
@@ -83,7 +76,13 @@ yargs
           default: 'Development Thing',
         });
     },
-    handler: (args) => {
-      updateSchema(args);
+    handler: async (args) => {
+      try {
+        await updateSchema(args);
+        console.log(chalk.green(`thing ${args.thingId} schema updated`));
+      } catch (err) {
+        console.log(chalk.red('it was not possible to update the thing\'s schema :('));
+        console.log(chalk.red(err));
+      }
     },
   });
