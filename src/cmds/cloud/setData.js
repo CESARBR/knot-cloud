@@ -1,38 +1,27 @@
 /* eslint-disable no-console */
 import yargs from 'yargs';
+import chalk from 'chalk';
 import { Client } from '@cesarbr/knot-cloud-sdk-js';
 import isBase64 from 'is-base64';
 import options from './utils/options';
 import getFileCredentials from './utils/getFileCredentials';
 
-const setData = (args) => {
+const setData = async (args) => {
   const client = new Client({
-    protocol: args.protocol,
     hostname: args.server,
     port: args.port,
-    pathName: args.pathName,
-    id: args['client-id'],
-    token: args['client-token'],
+    protocol: args.protocol,
+    username: args.username,
+    password: args.password,
+    token: args.token,
   });
 
-  client.on('ready', () => {
-    client.setData(args['thing-id'], [{
-      sensorId: args.sensorId,
-      value: args.value,
-    }]);
-  });
-  client.on('sent', () => {
-    client.close();
-  });
-  client.on('error', (err) => {
-    if (err.message) {
-      console.log(err.message);
-    } else {
-      console.log(err);
-    }
-    client.close();
-  });
-  client.connect();
+  await client.connect();
+  await client.setData(args.thingId, [{
+    sensorId: args.sensorId,
+    value: args.value,
+  }]);
+  await client.close();
 };
 
 yargs
@@ -66,7 +55,13 @@ yargs
           },
         });
     },
-    handler: (args) => {
-      setData(args);
+    handler: async (args) => {
+      try {
+        await setData(args);
+        console.log(chalk.green('update data command successfully sent'));
+      } catch (err) {
+        console.log(chalk.red('it was not possible to update the thing\'s data :('));
+        console.log(chalk.red(err));
+      }
     },
   });
