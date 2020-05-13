@@ -53,6 +53,7 @@
     "fs-extra": "^7.0.1",
     "git-clone": "^0.1.0",
     "is-base64": "^0.1.0",
+    "jsonwebtoken": "^8.5.1",
     "prompt": "^1.0.0",
     "yargs": "^13.3.0"
   }
