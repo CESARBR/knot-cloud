@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  # KNoT Fog Core
+  babeltower:
+    image: cesarbr/knot-babeltower:dev
+    volumes:
+      - ../knot-babeltower:/usr/src/app
+
+  storage:
+    image: cesarbr/knot-cloud-storage:dev
+    volumes:
+      - ../knot-cloud-storage:/usr/src/app
+
+  rabbitmq:
+    image: rabbitmq:management
