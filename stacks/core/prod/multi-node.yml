@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  users:
+    deploy:
+      placement:
+        constraints: [node.role == worker]
+
+  things:
+    deploy:
+      placement:
+        constraints: [node.role == worker]
+
+  authn:
+    deploy:
+      placement:
+        constraints: [node.role == worker]
+
+  storage:
+    deploy:
+      placement:
+        constraints: [node.role == worker]
+
+  babeltower:
+    deploy:
+      placement:
+        constraints: [node.role == worker]
