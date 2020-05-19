@@ -1,0 +1,116 @@
+version: '3.7'
+
+services:
+  # Mainflux services
+  users:
+    image: mainflux/users:0.10.0
+    env_file: './env.d/mainflux-users.env'
+    depends_on:
+      - users-db
+    deploy:
+      replicas: 1
+
+  things:
+    image: mainflux/things:0.10.0
+    env_file: './env.d/mainflux-things.env'
+    depends_on:
+      - things-db
+      - users
+    deploy:
+      replicas: 1
+
+  authn:
+    image: mainflux/authn:0.10.0
+    env_file: './env.d/mainflux-authn.env'
+    depends_on:
+      - authn-db
+    deploy:
+      replicas: 1
+
+  # KNoT Fog Core
+  babeltower:
+    image: cesarbr/knot-babeltower
+    env_file: './env.d/knot-babeltower.env'
+    depends_on:
+      - rabbitmq
+      - users
+      - things
+    deploy:
+      replicas: 1
+
+  storage:
+    image: cesarbr/knot-cloud-storage
+    env_file: './env.d/knot-cloud-storage.env'
+    depends_on:
+      - mongo
+    deploy:
+      replicas: 1
+
+  # External dependencies: database, tracing, message broker, load balancer.
+  things-redis:
+    image: redis:5.0-alpine
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          memory: 300M
+
+  es-redis:
+    image: redis:5.0-alpine
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          memory: 300M
+
+  things-db:
+    image: postgres:9.6.17-alpine
+    env_file: './env.d/mainflux-things.env'
+    volumes:
+      - mainflux-things-db-volume:/var/lib/postgresql/data
+    deploy:
+      replicas: 1
+
+  users-db:
+    image: postgres:9.6.17-alpine
+    env_file: './env.d/mainflux-users.env'
+    volumes:
+      - mainflux-users-db-volume:/var/lib/postgresql/data
+    deploy:
+      replicas: 1
+
+  authn-db:
+    image: postgres:9.6.17-alpine
+    env_file: './env.d/mainflux-authn.env'
+    volumes:
+      - mainflux-authn-db-volume:/var/lib/postgresql/data
+    deploy:
+      replicas: 1
+
+  rabbitmq:
+    image: rabbitmq
+    env_file: './env.d/rabbitmq.env'
+    deploy:
+      replicas: 1
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.13
+    env_file: './env.d/mainflux-jaeger.env'
+    deploy:
+      replicas: 1
+
+  mongo:
+    image: mongo
+    volumes:
+      - mongo-data:/data/db
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          memory: 300M
+
+volumes:
+  mainflux-things-db-volume:
+  mainflux-users-db-volume:
+  mainflux-authn-db-volume:
+  mongo-data:
