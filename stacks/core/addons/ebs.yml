@@ -1,0 +1,30 @@
+version: '3.7'
+
+# This file defines the binding between Docker and AWS EBS volumes through the REX-Ray plugin.
+# Take a look at the following link for more details about how it works and the necessary configuration:
+# https://rexray.readthedocs.io/en/stable/user-guide/schedulers/docker/plug-ins/aws/
+
+volumes:
+  mainflux-things-db-volume:
+    driver: rexray/ebs:latest
+    driver_opts:
+      size: 5
+      volumeType: gp2
+
+  mainflux-users-db-volume:
+    driver: rexray/ebs:latest
+    driver_opts:
+      size: 5
+      volumeType: gp2
+
+  mainflux-authn-db-volume:
+    driver: rexray/ebs:latest
+    driver_opts:
+      size: 5
+      volumeType: gp2
+
+  knot-cloud-db-volume:
+    driver: rexray/ebs:latest
+    driver_opts:
+      size: 5
+      volumeType: gp2
