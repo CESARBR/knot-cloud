@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  connector:
+    image: cesarbr/knot-fog-connector
+    env_file: './env.d/knot-connector.env'
+    depends_on:
+      - rabbitmq
+    deploy:
+      replicas: 1

@@ -1,0 +1,35 @@
+version: '3.7'
+
+# This file contains the necessary traefik configuration to enable the HTTP services to communicate securely.
+# Details: https://docs.traefik.io/https/tls/
+
+services:
+  babeltower:
+    deploy:
+      labels:
+        - traefik.http.routers.babeltower.entrypoints=websecure
+        - traefik.http.routers.babeltower.tls=true
+        - traefik.http.routers.babeltower.tls.certresolver=https
+
+  storage:
+    deploy:
+      labels:
+        - traefik.http.routers.storage.entrypoints=websecure
+        - traefik.http.routers.storage.tls=true
+        - traefik.http.routers.storage.tls.certresolver=https
+
+  # TODO: Add global redirect from http to https request
+  traefik:
+    command: >
+      traefik
+        --entrypoints.websecure.address=:443
+        --certificatesresolvers.https.acme.email="jasn@cesar.org.br"
+        --certificatesresolvers.https.acme.storage=/acme/acme.json
+        --certificatesresolvers.https.acme.tlschallenge=true
+    ports:
+      - '443:443'
+    volumes:
+      - /acme/acme.json:/acme/acme.json
+
+volumes:
+  acme-storage:
