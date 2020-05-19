@@ -23,20 +23,10 @@ The following instructions always assume you are in the directory created after 
 
 If you intend to use the development stack, a command line tool that downloads and configures the stack is required.
 
-#### Build and install CLI tool
-
-The tool is built and installed as follows:
+#### Install CLI tool
 
 ```bash
-npm install
-npm run build
-npm link
-```
-
-Depending on npm configurations, it might be necessary to run `npm link` with super user privileges.
-
-```bash
-sudo npm link
+npm install -g @cesarbr/knot-cloud
 ```
 
 ### Choose the stack
@@ -53,7 +43,9 @@ The source code and stack template files will be created under `<path>/stack`.
 
 #### Production
 
-In the moment, the `cloud` stack is the only with production support. Its comes in two flavours: all-in-one and multinode. The former will deploy all the services on a single machine while the latter will deploy them in multiple nodes (at least two). The files for the two flavours are available at `stacks/knot-cloud/prod`.
+In the moment, the `cloud` stack is the only with production support. It comes in two flavours: all-in-one and multinode. The former will deploy all the services on a single machine while the latter will deploy them in multiple nodes (at least two). The files for the two flavours are available at `stacks/knot-cloud/prod`.
+
+On the contrary, the `core` stack is currently under development and can be deployed for test purposes. It is organized in a similar way of the `cloud` stack but its definition is structured with multiple compose files, aiming to improve usability. The files are available at `stacks/core`.
 
 ### Initialize Swarm mode
 
