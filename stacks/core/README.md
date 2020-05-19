@@ -13,19 +13,82 @@ If you don't have a domain or can't configure the main DNS server, you can confi
 
 On Windows, the hosts file is usually located under `c:\Windows\System32\Drivers\etc\hosts`. On Unix systems, it is commonly found at `/etc/hosts`. Regardless of you operating system, administrator or super user privileges will be required.
 
-### Deploy: stage 1
+### Deploy
 
-Stage 1 contains the core services. The next sections provide the instructions to configure and deploy them. Whenever a configuration file is mentioned, it refers to a file found at `stack/env.d`.
+The `core` stack uses multiple compose files to setup the services and reach the desired state. Common definitions to both development and production settings are grouped in the `base` directory and specific ones are grouped in the `dev` and `prod` directories. For example, when configuring `traefik` as service's load balancer, you can deploy its development definition to avoid exposing services without need. Also, it can be necessary to deploy the services into multiple machines, which could be done by using the `multi-node` definitions.
 
-#### Deploy
+#### Development
 
-Deploy the stage 1 services:
+When the stack is copied to a specified workspace through the CLI `init` operation, the following command must be executed to deploy the services:
 
 ```bash
-docker stack deploy -c stage-1.yml knot-cloud-core
+docker stack deploy --compose-file base.yml --compose-file dev.yml --compose-file traefik.yml knot-cloud-core
 ```
 
-#### Verify
+This stack will be deployed with the basic services, which are related to the thing, user and messaging capabilities. In order to run it as the KNoT Fog instance, read the following instructions:
+
+1. Create a new user account in the **KNoT Cloud** and save the output:
+
+   ```bash
+   knot-cloud create-user <email> <password> --server api.knot.cloud --protocol https
+   ```
+
+1. Create a new user account in the **KNoT Fog** and save the output:
+
+   ```bash
+   knot-cloud create-user <email> <password> --server api.fog --protocol http
+   ```
+
+1. Update the connector configuration in .`/env.d/knot-connector.env`:
+
+   - Add the **cloud** user's token to the `CLOUD_SETTINGS` variable object by changing the `token` property.
+   - Add the **fog** user's token to the `FOG_USER_TOKEN` variable.
+
+1. Deploy connector to the `knot-cloud-core` stack:
+
+   ```bash
+   docker stack deploy --compose-file connector.yml knot-cloud-core
+   ```
+
+1. Enter connector directory and install its dependencies:
+
+   ```bash
+   npm install
+   ```
+
+> **_NOTE:_** [Click here](#verify) and read the instructions to verify if the services are up correctly.
+
+#### Production
+
+The deployment to production can be done without switching to another directory. It can be done as follows:
+
+```bash
+docker stack deploy --compose-file prod/traefik.yml --compose-file base/base.yml knot-cloud-core
+```
+
+> **_NOTE:_** The file passed to the `--compose-file` flag must be one located at the `prod` directory so that the composed stack file can find the env files (`env.d`).
+
+### Addons
+
+Additional configuration can be done by using some definition files located at `addons` directory. The available ones are described below:
+
+- EBS (`ebs.yml`): creates a bind between services volume and AWS [EBS](https://aws.amazon.com/pt/ebs/) volumes.
+- TLS (`tls.yml`): enables `storage` and `babeltower` to receive HTTPS requests.
+- Connector (`connector.yml` and `connector.dev.yml`): adds the [knot-fog-connector](https://github.com/CESARBR/knot-fog-connector) service to the stack.
+
+Example:
+
+```bash
+docker stack deploy --compose-file prod/traefik.yml --compose-file base/base.yml --compose-file addons/connector.yml knot-cloud-core
+```
+
+The addons can be deployed separetely if the stack is already running:
+
+```bash
+docker stack deploy --compose-file addons/connector.yml knot-cloud-core
+```
+
+### Verify
 
 Check if all the services are running and have exactly one replica:
 
