@@ -1,0 +1,68 @@
+version: '3.7'
+
+services:
+  users:
+    deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.http.services.users.loadbalancer.server.port=8180
+        - traefik.http.routers.users.rule=HostRegexp(`{subdomain:users}.{domain:[a-zA-Z0-9.]+}`)
+        - traefik.http.routers.users.entrypoints=http
+
+  things:
+    deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.http.services.things.loadbalancer.server.port=8182
+        - traefik.http.routers.things.rule=HostRegexp(`{subdomain:things}.{domain:[a-zA-Z0-9.]+}`)
+        - traefik.http.routers.things.entrypoints=http
+
+  authn:
+   deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.http.services.authn.loadbalancer.server.port=8183
+        - traefik.http.routers.authn.rule=HostRegexp(`{subdomain:authn}.{domain:[a-zA-Z0-9.]+}`)
+        - traefik.http.routers.authn.entrypoints=http
+
+  storage:
+    deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.http.services.storage.loadbalancer.server.port=8181
+        - traefik.http.routers.storage.rule=HostRegexp(`{subdomain:storage}.{domain:[a-zA-Z0-9.]+}`)
+        - traefik.http.routers.storage.entrypoints=http
+
+  babeltower:
+    deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.http.services.babeltower.loadbalancer.server.port=8080
+        - traefik.http.routers.babeltower.rule=HostRegexp(`{subdomain:api}.{domain:[a-zA-Z0-9.]+}`)
+        - traefik.http.routers.babeltower.entrypoints=http
+
+  rabbitmq:
+    deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.tcp.services.rabbitmq.loadbalancer.server.port=5672
+        - traefik.tcp.routers.rabbitmq.rule=HostSNI(`*`)
+        - traefik.tcp.routers.rabbitmq.entrypoints=broker
+
+  traefik:
+    image: traefik:v2.2
+    command: >
+      traefik
+        --providers.docker
+        --providers.docker.watch
+        --providers.docker.swarmMode
+        --providers.docker.exposedByDefault=false
+        --entrypoints.http.address=:80
+        --entrypoints.broker.address=:5672
+    ports:
+      - '80:80'
+      - '5672:5672'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      mode: global
