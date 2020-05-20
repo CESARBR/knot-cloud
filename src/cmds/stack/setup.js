@@ -14,7 +14,7 @@ const KNOT_CLOUD_REPOSITORIES = [
 
 const KNOT_CLOUD_CORE_REPOSITORIES = [
   'CESARBR/knot-babeltower',
-  'CESARBR/knot-cloud-storage:migration_golang',
+  'CESARBR/knot-cloud-storage',
 ];
 
 const KNOT_ERR_FILE = 'knot.err';
@@ -46,6 +46,9 @@ const cpDevDir = (basePath, version) => {
     }
     fs.ensureDirSync(stackDir);
     fs.copySync(`${__dirname}/../../stacks/${version}/dev`, stackDir);
+    if (version === 'core') {
+      fs.copySync(`${__dirname}/../../stacks/${version}/base`, stackDir);
+    }
     console.log('Created development stack files');
   } catch (err) {
     const msg = '[Error]:\n\tAn error occurred while copying the development stack files.';
