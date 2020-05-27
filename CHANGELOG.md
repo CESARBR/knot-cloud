@@ -1,3 +1,18 @@
+# [2.0.0](https://github.com/CESARBR/knot-cloud/compare/v1.4.0...v2.0.0)
+
+### Features
+
+- Update CLI operations to use `@cesarbr/knot-cloud-sdk-js` with AMQP support
+- Add KNoT Cloud core (Mainflux version) specification
+- Update traefik version to v2.2
+
+### Bug Fixes
+
+- Fix `init` command when copying stack files
+- Fix `init` command when path isn't passed
+- Fix storage listing on wrong port
+- Fix wrong webhook port configuration
+
 # [1.4.0](https://github.com/CESARBR/knot-cloud/compare/v1.3.0...v1.4.0)
 
 ### Features
