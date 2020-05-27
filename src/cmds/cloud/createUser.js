@@ -12,7 +12,9 @@ const createUser = async (args) => {
 
   try {
     await client.createUser(args.email, args.password);
+    const token = await client.createToken(args.email, args.password);
     console.log(chalk.green('user successfully created'));
+    console.log(chalk.grey(JSON.stringify(token, null, 2)));
   } catch (err) {
     if (err.code === 409) {
       console.log(chalk.red(`user ${args.email} is already created :/`));
