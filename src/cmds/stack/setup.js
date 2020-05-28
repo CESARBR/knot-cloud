@@ -88,13 +88,15 @@ const initStack = (args) => {
     fs.unlinkSync(KNOT_ERR_PATH);
   }
 
-  if (version === 'cloud') {
-    cloneRepositories(initPath, KNOT_CLOUD_REPOSITORIES);
-  } else if (version === 'core') {
-    cloneRepositories(initPath, KNOT_CLOUD_CORE_REPOSITORIES);
-  } else {
-    console.log('Invalid cloud version selected. Please type \'cloud\' or \'core\'');
-    return;
+  if (args.clone) {
+    if (version === 'cloud') {
+      cloneRepositories(initPath, KNOT_CLOUD_REPOSITORIES);
+    } else if (version === 'core') {
+      cloneRepositories(initPath, KNOT_CLOUD_CORE_REPOSITORIES);
+    } else {
+      console.log('Invalid cloud version selected. Please type \'cloud\' or \'core\'');
+      return;
+    }
   }
 
   cpDevDir(initPath, version);
@@ -104,6 +106,16 @@ yargs // eslint-disable-line import/no-extraneous-dependencies
   .command({
     command: 'init [cloudVersion] [path]',
     desc: 'Initialize [cloudVersion] stack at [path]',
+    builder: (_yargs) => {
+      _yargs
+        .options({
+          clone: {
+            describe: 'Disable cloning repositories',
+            default: true,
+            demandOption: false,
+          },
+        });
+    },
     handler: (args) => {
       initStack(args);
     },
