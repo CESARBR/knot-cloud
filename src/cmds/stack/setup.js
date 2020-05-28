@@ -15,6 +15,7 @@ const KNOT_CLOUD_REPOSITORIES = [
 const KNOT_CLOUD_CORE_REPOSITORIES = [
   'CESARBR/knot-babeltower',
   'CESARBR/knot-cloud-storage',
+  'CESARBR/knot-fog-connector',
 ];
 
 const KNOT_ERR_FILE = 'knot.err';
@@ -48,6 +49,7 @@ const cpDevDir = (basePath, version) => {
     fs.copySync(`${__dirname}/../../stacks/${version}/dev`, stackDir);
     if (version === 'core') {
       fs.copySync(`${__dirname}/../../stacks/${version}/base`, stackDir);
+      fs.copyFileSync(`${__dirname}/../../stacks/${version}/addons/connector.dev.yml`, `${stackDir}/connector.yml`);
     }
     console.log('Created development stack files');
   } catch (err) {
