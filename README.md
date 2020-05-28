@@ -35,6 +35,8 @@ npm install -g @cesarbr/knot-cloud
 
 The development stack must be created using the tool described in the previous section. Firstly, inform which `stack` you want to create: `cloud` or `core` (defaults to `cloud`). Lastly, Choose a `<path>` where the stack should be created (defaults to the current directory) and then run:
 
+> **_NOTE:_** The following command assumes you don't have a workspace with the repositories and clone them. To disable this, run it with the `--no-clone` flag.
+
 ```bash
 knot-cloud init [stack] [path]
 ```
