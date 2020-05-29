@@ -10,13 +10,13 @@ const createToken = async (args) => {
     protocol: args.protocol,
   });
 
-  return client.createToken(args.email, args.password);
+  return client.createToken(args.email, args.credential, args.type);
 };
 
 yargs
   .command({
-    command: 'create-token <email> <password>',
-    desc: "Create a new user's token",
+    command: 'create-token <email> <credential> <type>',
+    desc: 'Create a new user or app token',
     builder: (_yargs) => {
       _yargs
         .options({
@@ -24,6 +24,11 @@ yargs
             describe: 'Server hostname',
             demandOption: true,
             default: 'api.knot.cloud',
+          },
+          port: {
+            describe: 'Server port',
+            demandOption: true,
+            default: 443,
           },
           protocol: {
             describe: 'Server protocol',
