@@ -1,3 +1,11 @@
+# [2.1.0](https://github.com/CESARBR/knot-cloud/compare/v2.0.0...v2.1.0)
+
+### Features
+
+- Improve KNoT Cloud core stack modularity
+- Add `--no-clone` option to avoid cloning the repositories when workspace is already prepared
+- Show token when user is created
+
 # [2.0.0](https://github.com/CESARBR/knot-cloud/compare/v1.4.0...v2.0.0)
 
 ### Features
