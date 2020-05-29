@@ -12,7 +12,7 @@ const createUser = async (args) => {
 
   try {
     await client.createUser(args.email, args.password);
-    const token = await client.createToken(args.email, args.password);
+    const token = await client.createToken(args.email, args.password, 'user');
     console.log(chalk.green('user successfully created'));
     console.log(chalk.grey(JSON.stringify(token, null, 2)));
   } catch (err) {
