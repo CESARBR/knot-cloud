@@ -90,6 +90,8 @@ services:
   rabbitmq:
     image: rabbitmq
     env_file: './env.d/rabbitmq.env'
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
     deploy:
       replicas: 1
 
@@ -114,3 +116,4 @@ volumes:
   mainflux-users-db-volume:
   mainflux-authn-db-volume:
   mongo-data:
+  rabbitmq-data:
