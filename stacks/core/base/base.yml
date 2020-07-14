@@ -3,7 +3,7 @@ version: '3.7'
 services:
   # Mainflux services
   users:
-    image: mainflux/users:0.10.0
+    image: mainflux/users:0.11.0
     env_file: './env.d/mainflux-users.env'
     depends_on:
       - users-db
@@ -11,7 +11,7 @@ services:
       replicas: 1
 
   things:
-    image: mainflux/things:0.10.0
+    image: mainflux/things:0.11.0
     env_file: './env.d/mainflux-things.env'
     depends_on:
       - things-db
@@ -20,7 +20,7 @@ services:
       replicas: 1
 
   authn:
-    image: mainflux/authn:0.10.0
+    image: mainflux/authn:0.11.0
     env_file: './env.d/mainflux-authn.env'
     depends_on:
       - authn-db
