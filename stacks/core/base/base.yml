@@ -24,6 +24,7 @@ services:
     env_file: './env.d/mainflux-authn.env'
     depends_on:
       - authn-db
+      - jaeger
     deploy:
       replicas: 1
 
