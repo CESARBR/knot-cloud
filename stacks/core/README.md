@@ -60,6 +60,14 @@ This stack will be deployed with the basic services, which are related to the th
 
 #### Production
 
+Firstly, create a new secret to the authenticaton service.
+
+  ```bash
+  openssl rand -base64 256
+  ```
+
+With the generated string, update the `MF_AUTHN_SECRET` environment variable in the `/env.d/mainflux-authn.env` file.
+
 The deployment to production can be done without switching to another directory. It can be done as follows:
 
 ```bash
