@@ -19,7 +19,20 @@ The `core` stack uses multiple compose files to setup the services and reach the
 
 #### Development
 
-When the stack is copied to a specified workspace through the CLI `init` operation, the following command must be executed to deploy the services:
+After using the `init` command as described [here](../../README.md#Development), the stack files will be copied to `<path>/stack` directory (`path` is the folder specified in the `init` execution), be sure to enter there. The following files should be shown when exploring the `stack` directory
+
+```bash
+cd <path>/stack
+ls
+```
+
+```text
+base.yml
+connector.yml
+dev.yml
+env.d
+traefik.yml
+```
 
 ```bash
 docker stack deploy --compose-file base.yml --compose-file dev.yml --compose-file traefik.yml knot-cloud-core
@@ -33,11 +46,16 @@ This stack will be deployed with the basic services, which are related to the th
    knot-cloud create-user <email> <password> --server api.knot.cloud --protocol https
    ```
 
-1. Create a new user account in the **KNoT Fog** and save the output:
-
    ```bash
-   knot-cloud create-user <email> <password> --server api.fog --protocol http
+   knot-cloud create-user knot@cesar.org.br exemplo-senha --server api.knot.cloud --protocol https
+
+   user successfully created
+   {
+     "token": "some-token-returned"
+   }
    ```
+
+1. Create a new user account in the **KNoT Fog** by repeating the same previous command with the options `--server api.fog` and `--protocol http` and save the output. The same e-mail and password can be used.
 
 1. Update the connector configuration in .`/env.d/knot-connector.env`:
 
@@ -50,9 +68,10 @@ This stack will be deployed with the basic services, which are related to the th
    docker stack deploy --compose-file connector.yml knot-cloud-core
    ```
 
-1. Enter connector directory and install its dependencies:
+1. Go to the connector directory, which is in the `<path>` directory, and install its dependencies:
 
    ```bash
+   cd <path>/knot-fog-connector
    npm install
    ```
 
@@ -62,9 +81,9 @@ This stack will be deployed with the basic services, which are related to the th
 
 Firstly, create a new secret to the authenticaton service.
 
-  ```bash
-  openssl rand -base64 256
-  ```
+```bash
+openssl rand -base64 256
+```
 
 With the generated string, update the `MF_AUTHN_SECRET` environment variable in the `/env.d/mainflux-authn.env` file.
 
@@ -104,4 +123,25 @@ Check if all the services are running and have exactly one replica:
 docker stack services knot-cloud-core
 ```
 
-And verifying that every service has one replica.
+You should see something like this:
+
+```text
+ID                  NAME                            MODE                REPLICAS            IMAGE
+24wn25ispd7c        knot-cloud-core_authn           replicated          1/1                 mainflux/authn:0.11.0
+vp096d9fbxqe        knot-cloud-core_authn-db        replicated          1/1                 postgres:9.6.17-alpine
+hgkdkk8ud689        knot-cloud-core_babeltower      replicated          1/1                 cesarbr/knot-babeltower:dev
+
+...
+```
+
+In addition, run the following command to verify an individual service logs.
+
+```bash
+docker service logs -f <service_name>
+```
+
+Example:
+
+```bash
+docker service logs -f knot-cloud-core_connector
+```
