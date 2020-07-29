@@ -7,8 +7,8 @@ This stack uses [Traefik](https://traefik.io) as a reverse proxy for the service
 If you don't have a domain or can't configure the main DNS server, you can configure a test domain in your machine before proceeding. Either setup a local DNS server, e.g. [bind9](https://wiki.debian.org/Bind9), or alternatively update your hosts file to include the following addresses:
 
 ```
-127.0.0.1   api
-127.0.0.1   storage
+127.0.0.1   api.fog
+127.0.0.1   storage.fog
 ```
 
 On Windows, the hosts file is usually located under `c:\Windows\System32\Drivers\etc\hosts`. On Unix systems, it is commonly found at `/etc/hosts`. Regardless of you operating system, administrator or super user privileges will be required.
