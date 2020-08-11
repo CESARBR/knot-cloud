@@ -1,0 +1,7 @@
+{
+    "sensorId": 0,
+    "change": true,
+    "timeSec": 10,
+    "lowerThreshold": 1000,
+    "upperThreshold": 3000
+}
