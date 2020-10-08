@@ -1,0 +1,13 @@
+{
+    "sensorId": 0,
+    "schema": {
+        "valueType": 3,
+        "unit": 0,
+        "typeId": 65521,
+        "name": "Sensor Example"
+    },
+    "event": {
+        "change": true,
+        "timeSec": 10
+    }
+}
