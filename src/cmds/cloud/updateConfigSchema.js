@@ -18,7 +18,7 @@ const getFileSchema = (filePath) => {
   };
 };
 
-const updateSchema = async (args) => {
+const updateConfigSchema = async (args) => {
   const client = new Client({
     hostname: args.server,
     port: args.port,
@@ -28,16 +28,19 @@ const updateSchema = async (args) => {
     token: args.token,
   });
 
-  const schema = {
+  const config = {
     sensorId: args.sensorId,
-    valueType: args.valueType,
-    unit: args.unit,
-    typeId: args.typeId,
-    name: args.name,
+    schema: {
+      valueType: args.valueType,
+      unit: args.unit,
+      typeId: args.typeId,
+      name: args.name,
+    },
   };
 
   await client.connect();
-  await client.updateSchema(args.thingId, [schema]);
+  const response = await client.updateConfig(args.thingId, [config]);
+  console.log(response);
   await client.close();
 };
 
@@ -45,14 +48,14 @@ yargs
   .config('credentials-file', path => getFileCredentials(path))
   .config('schema-file', path => getFileSchema(path))
   .command({
-    command: 'update-schema <thing-id> [sensor-id] [value-type] [unit] [type-id] [name]',
+    command: 'update-config-schema <thing-id> <sensor-id> [value-type] [unit] [type-id] [name]',
     desc: 'Update a thing schema',
     builder: (_yargs) => {
       _yargs
         .options(options)
         .positional('sensor-id', {
           describe: 'Sensor ID',
-          demandOption: false,
+          demandOption: true,
           default: 0,
         })
         .positional('value-type', {
@@ -78,7 +81,7 @@ yargs
     },
     handler: async (args) => {
       try {
-        await updateSchema(args);
+        await updateConfigSchema(args);
         console.log(chalk.green(`thing ${args.thingId} schema updated`));
       } catch (err) {
         console.log(chalk.red('it was not possible to update the thing\'s schema :('));
