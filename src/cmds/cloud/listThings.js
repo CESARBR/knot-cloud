@@ -1,3 +1,4 @@
+
 /* eslint-disable no-console */
 import yargs from 'yargs';
 import chalk from 'chalk';
@@ -10,8 +11,8 @@ const printThings = (devices) => {
   devices.forEach((d) => {
     console.log(`${chalk.green.bold('id')}: ${chalk.blueBright(d.id)}`);
     console.log(`${chalk.green.bold('name')}: ${chalk.blueBright(d.name)}`);
-    if (d.schema) {
-      console.log(`${chalk.green.bold('schema')}: ${chalk.blueBright(JSON.stringify(d.schema, null, 2))}`);
+    if (d.config) {
+      console.log(`${chalk.green.bold('config')}: ${chalk.blueBright(JSON.stringify(d.config, null, 2))}`);
     }
     console.log('\n');
   });
