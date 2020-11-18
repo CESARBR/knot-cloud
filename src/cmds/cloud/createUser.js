@@ -20,7 +20,11 @@ const createUser = async (args) => {
       console.log(chalk.red(`user ${args.email} is already created :/`));
     } else {
       console.log(chalk.red('it was not possible to create your user :('));
-      console.log(chalk.red(err));
+      if (err.message === '') {
+        console.log(chalk.red('no error message returned, check if user and babeltower services are correctly up'));
+      } else {
+        console.log(chalk.red(err));
+      }
     }
   }
 };
