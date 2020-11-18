@@ -145,3 +145,9 @@ Example:
 ```bash
 docker service logs -f knot-cloud_connector
 ```
+
+### Demonstration
+
+If you have had any trouble bringing the services up and creating the user token, watch the following demonstration video:
+
+[![asciicast](https://asciinema.org/a/rRFW94ntKJ9J36IRRWKk0Bcs5.svg)](https://asciinema.org/a/rRFW94ntKJ9J36IRRWKk0Bcs5)
