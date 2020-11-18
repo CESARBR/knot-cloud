@@ -5,14 +5,6 @@ import path from 'path';
 import yargs from 'yargs';
 
 const KNOT_CLOUD_REPOSITORIES = [
-  'CESARBR/knot-cloud-ui',
-  'CESARBR/knot-cloud-protocol-adapter-websocket',
-  'CESARBR/knot-cloud-authenticator',
-  'CESARBR/knot-cloud-storage',
-  'CESARBR/knot-cloud-bootstrap',
-];
-
-const KNOT_CLOUD_CORE_REPOSITORIES = [
   'CESARBR/knot-babeltower',
   'CESARBR/knot-cloud-storage',
   'CESARBR/knot-fog-connector',
@@ -38,7 +30,7 @@ function handleError(err, msg, logFileMessage) {
   fs.writeFileSync(KNOT_ERR_PATH, `${err.stack}\n`, { flag: 'a', encoding: 'utf-8' });
 }
 
-const cpDevDir = (basePath, version) => {
+const cpDevDir = (basePath) => {
   const stackDir = path.join(basePath, 'stack');
 
   try {
@@ -46,11 +38,9 @@ const cpDevDir = (basePath, version) => {
       fs.removeSync(stackDir);
     }
     fs.ensureDirSync(stackDir);
-    fs.copySync(`${__dirname}/../../stacks/${version}/dev`, stackDir);
-    if (version === 'core') {
-      fs.copySync(`${__dirname}/../../stacks/${version}/base`, stackDir);
-      fs.copyFileSync(`${__dirname}/../../stacks/${version}/addons/connector.dev.yml`, `${stackDir}/connector.yml`);
-    }
+    fs.copySync(`${__dirname}/../../stacks/cloud/dev`, stackDir);
+    fs.copySync(`${__dirname}/../../stacks/cloud/base`, stackDir);
+    fs.copyFileSync(`${__dirname}/../../stacks/cloud/addons/connector.dev.yml`, `${stackDir}/connector.yml`);
     console.log('Created development stack files');
   } catch (err) {
     const msg = '[Error]:\n\tAn error occurred while copying the development stack files.';
@@ -82,30 +72,22 @@ const cloneRepositories = (initPath, repositories) => {
 
 const initStack = (args) => {
   const initPath = args.path || '';
-  const version = args.cloudVersion || 'cloud';
 
   if (fs.existsSync(KNOT_ERR_PATH)) {
     fs.unlinkSync(KNOT_ERR_PATH);
   }
 
   if (args.clone) {
-    if (version === 'cloud') {
-      cloneRepositories(initPath, KNOT_CLOUD_REPOSITORIES);
-    } else if (version === 'core') {
-      cloneRepositories(initPath, KNOT_CLOUD_CORE_REPOSITORIES);
-    } else {
-      console.log('Invalid cloud version selected. Please type \'cloud\' or \'core\'');
-      return;
-    }
+    cloneRepositories(initPath, KNOT_CLOUD_REPOSITORIES);
   }
 
-  cpDevDir(initPath, version);
+  cpDevDir(initPath);
 };
 
 yargs // eslint-disable-line import/no-extraneous-dependencies
   .command({
-    command: 'init [cloudVersion] [path]',
-    desc: 'Initialize [cloudVersion] stack at [path]',
+    command: 'init [path]',
+    desc: 'Initialize the stack at [path]',
     builder: (_yargs) => {
       _yargs
         .options({
