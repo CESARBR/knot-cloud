@@ -44,7 +44,11 @@ yargs
         console.log(chalk.grey(token.token));
       } catch (err) {
         console.log(chalk.red('it was not possible to create a new token :('));
-        console.log(chalk.red(err));
+        if (err.message === '') {
+          console.log(chalk.red('no error message returned, check if auth and babeltower services are correctly up'));
+        } else {
+          console.log(chalk.red(err));
+        }
       }
     },
   });
