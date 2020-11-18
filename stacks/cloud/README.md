@@ -2,162 +2,146 @@
 
 ### Configure DNS
 
-This stack uses [Traefik](https://traefik.io) as a reverse proxy for the services and requires that you configure your DNS server to point, at least, the **www**, **ws**, **auth** and **bootstrap** subdomains to the machine where the stack is being deployed, so that it can route the requests to the appropriated service. It is possible to configure it to route by path or port, but instructions for that won't be provided here for brevity.
+This stack uses [Traefik](https://traefik.io) as a reverse proxy for the services and requires that you configure your DNS server to point, at least, the **api** and **storage** subdomains to the machine where the stack is being deployed, so that it can route the requests to the appropriated service. It is possible to configure it to route by path or port, but instructions for that won't be provided here for brevity.
 
 If you don't have a domain or can't configure the main DNS server, you can configure a test domain in your machine before proceeding. Either setup a local DNS server, e.g. [bind9](https://wiki.debian.org/Bind9), or alternatively update your hosts file to include the following addresses:
 
 ```
-127.0.0.1	www
-127.0.0.1	ws
-127.0.0.1	auth
-127.0.0.1	bootstrap
+127.0.0.1   api.fog
+127.0.0.1   storage.fog
 ```
 
 On Windows, the hosts file is usually located under `c:\Windows\System32\Drivers\etc\hosts`. On Unix systems, it is commonly found at `/etc/hosts`. Regardless of you operating system, administrator or super user privileges will be required.
 
-Notice that when deploying KNoT Cloud locally, most of the times the `<your-domain>` subdomains in the following sections should be disregarded. For instance, you would access your KNoT Cloud at `https://www` after deploy.
+### Deploy
 
-### Deploy: stage 1
+The stack uses multiple compose files to setup the services and reach the desired state. Common definitions to both development and production settings are grouped in the `base` directory and specific ones are grouped in the `dev` and `prod` directories. For example, when configuring `traefik` as service's load balancer, you can deploy its development definition to avoid exposing services without need. Also, it can be necessary to deploy the services into multiple machines, which could be done by using the `multi-node` definitions.
 
-Stage 1 contains the core services. The next sections provide the instructions to configure and deploy them. Whenever a configuration file is mentioned, it refers to a file found at `stacks/knot-cloud/prod/env.d`, for production mode, or `<path>/stack/dev/env.d`, for development mode.
+#### Development
 
-#### Configure services
-
-Create, if you already don't have, a private/public key pair:
+After using the `init` command as described [here](../../README.md#Development), the stack files will be copied to `<path>/stack` directory (`path` is the folder specified in the `init` execution), be sure to enter there. The following files should be shown when exploring the `stack` directory
 
 ```bash
-openssl genpkey -algorithm RSA -out privateKey.pem -pkeyopt rsa_keygen_bits:2048
-openssl rsa -pubout -in privateKey.pem -out publicKey.pem
+cd <path>/stack
+ls
 ```
 
-Then, convert the keys to base 64:
+```text
+base.yml
+connector.yml
+dev.yml
+env.d
+traefik.yml
+```
 
 ```bash
-base64 < privateKey.pem
-base64 < publicKey.pem
+docker stack deploy --compose-file base.yml --compose-file dev.yml --compose-file traefik.yml knot-cloud
 ```
 
-And generate a 16-bit random value in hexadecimal format:
+This stack will be deployed with the basic services, which are related to the thing, user and messaging capabilities. In order to run it as the KNoT Fog instance, read the following instructions:
+
+1. Create a new user account in the **KNoT Cloud** and save the output:
+
+   ```bash
+   knot-cloud create-user <email> <password> --server api.knot.cloud --protocol https
+   ```
+
+   ```bash
+   knot-cloud create-user knot@cesar.org.br exemplo-senha --server api.knot.cloud --protocol https
+
+   user successfully created
+   {
+     "token": "some-token-returned"
+   }
+   ```
+
+1. Create a new user account in the **KNoT Fog** by repeating the same previous command with the options `--server api.fog` and `--protocol http` and save the output. The same e-mail and password can be used.
+
+1. Update the connector configuration in .`/env.d/knot-connector.env`:
+
+   - Add the **cloud** user's token to the `CLOUD_SETTINGS` variable object by changing the `token` property.
+   - Add the **fog** user's token to the `FOG_USER_TOKEN` variable.
+
+1. Deploy connector to the `knot-cloud` stack:
+
+   ```bash
+   docker stack deploy --compose-file connector.yml knot-cloud
+   ```
+
+1. Go to the connector directory, which is in the `<path>` directory, and install its dependencies:
+
+   ```bash
+   cd <path>/knot-fog-connector
+   npm install
+   ```
+
+> **_NOTE:_** [Click here](#verify) and read the instructions to verify if the services are up correctly.
+
+#### Production
+
+Firstly, create a new secret to the authenticaton service.
 
 ```bash
-openssl rand -hex 16
+openssl rand -base64 256
 ```
 
-Finally, set `TOKEN`, `PRIVATE_KEY_BASE64` and `PUBLIC_KEY_BASE64` to the values above in:
-- `meshblu-core-dispatcher.env`
-- `meshblu-core-worker-webhook.env`
-- `knot-cloud-storage.env`
+With the generated string, update the `MF_AUTHN_SECRET` environment variable in the `/env.d/mainflux-authn.env` file.
 
-#### Deploy
-
-Deploy the stage 1 services:
+The deployment to production can be done without switching to another directory. It can be done as follows:
 
 ```bash
-docker stack deploy -c stage-1.yml knot-cloud
+docker stack deploy --compose-file prod/traefik.yml --compose-file base/base.yml knot-cloud
 ```
 
-#### Verify
+> **_NOTE:_** The file passed to the `--compose-file` flag must be one located at the `prod` directory so that the composed stack file can find the env files (`env.d`).
 
-Check if all services are running and have exactly one replica:
+### Addons
+
+Additional configuration can be done by using some definition files located at `addons` directory. The available ones are described below:
+
+- EBS (`ebs.yml`): creates a bind between services volume and AWS [EBS](https://aws.amazon.com/pt/ebs/) volumes.
+- TLS (`tls.yml`): enables `storage` and `babeltower` to receive HTTPS requests.
+- Connector (`connector.yml` and `connector.dev.yml`): adds the [knot-fog-connector](https://github.com/CESARBR/knot-fog-connector) service to the stack.
+
+Example:
+
+```bash
+docker stack deploy --compose-file prod/traefik.yml --compose-file base/base.yml --compose-file addons/connector.yml knot-cloud
+```
+
+The addons can be deployed separetely if the stack is already running:
+
+```bash
+docker stack deploy --compose-file addons/connector.yml knot-cloud
+```
+
+### Verify
+
+Check if all the services are running and have exactly one replica:
 
 ```bash
 docker stack services knot-cloud
 ```
 
-### Deploy: stage 2 bootstrap
+You should see something like this:
 
-Before bringing the stage 2 services up, a bootstrap process must be executed in the stage 1 services. The next sections provide the instructions to execute this process.
+```text
+ID                  NAME                            MODE                REPLICAS            IMAGE
+24wn25ispd7c        knot-cloud_authn           replicated          1/1                 mainflux/authn:0.11.0
+vp096d9fbxqe        knot-cloud_authn-db        replicated          1/1                 postgres:9.6.17-alpine
+hgkdkk8ud689        knot-cloud_babeltower      replicated          1/1                 cesarbr/knot-babeltower:dev
 
-#### Deploy
-
-Deploy the stage 2 bootstrap services:
-
-```bash
-docker stack deploy -c stage-2-bootstrap.yml knot-cloud
+...
 ```
 
-Wait until the bootstrap service is responsive, when the following command should succeed:
+In addition, run the following command to verify an individual service logs.
 
 ```bash
-curl https://bootstrap.<your domain>/healthcheck
+docker service logs -f <service_name>
 ```
 
-**Note:** If the HTTPS certificates are not configured locally, traefik has a default certificate that is used in such cases. To use traefik's default certificate, it is necessary to add `-k` parameter to the `curl` command otherwise the request will fail.
-
-#### Bootstrap
-
-Once the services are started, run the bootstrap process:
+Example:
 
 ```bash
-curl -X POST https://bootstrap.<your domain>/bootstrap
+docker service logs -f knot-cloud_connector
 ```
-
-Save the output for the next steps.
-
-**Note:** If the HTTPS certificates are not configured locally, traefik has a default certificate that is used in such cases. To use traefik's default certificate, it is necessary to add `-k` parameter to the `curl` command otherwise the request will fail.
-
-#### Tear down
-
-List the stack services:
-
-```bash
-docker stack services knot-cloud
-```
-
-Remove the bootstrap service (get the name from the list above, probably will be `knot-cloud_boostrap`):
-
-```bash
-docker service rm <bootstrap-service-name>
-```
-
-### Deploy: stage 2
-
-The stage 2 is the last stage, in which the user authentication service and the configuration UI are started. The next sections provide the instructions to configure and deploy them.
-
-#### Configure services
-
-Get the authenticator's UUID and token from the bootstrap output and set `AUTHENTICATOR_UUID` and `AUTHENTICATOR_TOKEN` variables in `knot-cloud-authenticator.env`.
-
-##### Configure mail service
-KNoT Cloud supports several mail services and is built in such a modular fashion that it is rather trivial to include a new one. Deploying KNoT Cloud without a mail service is also allowed, although not recommended other than for testing purposes.
-The supported mail services and related environment variables are:
-- Disable mail service
-    ```
-    MAIL_SERVICE=NONE
-    ```
-- Mailgun
-    ```
-    MAIL_SERVICE=MAILGUN
-    MAILGUN_DOMAIN=<your_mailgun_domain>
-    MAILGUN_API_KEY=<you_mailgun_api_key>
-    ```
-    Where `MAILGUN_DOMAIN` and `MAILGUN_API_KEY` are your [Mailgun](https://mailgun.com)'s account domain and API key.
-- AWS SES
-    ```
-    MAIL_SERVICE=AWS-SES
-    AWS_REGION=<aws_user_region>
-    AWS_ACCESS_KEY_ID=<aws_user_acess_key_id>
-    AWS_SECRET_ACCESS_KEY=<aws_user_secret_acess_key>
-    ```
-    Where `AWS_REGION`, `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are your [Amazon Web Services](https://aws.amazon.com/)' account information.
-    **If you are running KNoT Cloud on AWS EC2 that is using [roles to grant permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html), it is not necessary to set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`. The role attached to the EC2 instance must include a policy that allows `ses:SendEmail` actions at least on the domain used to send the reset e-mail (see `RESET_SENDER_ADDRESS` below).**
-    For more information on AWS SES policies, refer to their [documentation](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/control-user-access.html).
-
-##### Configure reset address
-
-Set `RESET_SENDER_ADDRESS` with the e-mail address that will send the reset password e-mails.
-If this stack is being deployed on an accessible domain, replaced `RESET_URI` with **http://&lt;your-domain&gt;/reset**. This is the reset password address that is going to be sent by e-mail.
-
-This is a **required** option, but you could fill using a bogus e-mail address if it will not be used or you have set the mail service to `NONE`.
-
-#### Deploy
-
-Deploy the stage 2 services
-
-```bash
-docker stack deploy -c stage-2.yml knot-cloud
-```
-
-#### Access
-
-Access KNoT Cloud in your browser at `https://www.<your-domain>`.
