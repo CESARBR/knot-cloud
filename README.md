@@ -1,23 +1,11 @@
 # KNoT Cloud
 
 KNoT Cloud is a cloud computing solution that enables operating on IoT devices
-by providing a minimum messaging and management infrastructure. It includes device and authentication management services as well as APIs for sending commands to the things and collect data from their sensors. Please, check out the [official documentation](https://knot-devel.cesar.org.br/doc/cloud/cloud-introduction.html) for more information.
-
-Currently, the KNoT Cloud is built over [Meshblu](https://meshblu.readme.io/) services which were demonstrated to have a low performance when running on some constrained environment such as the Fog Computing layer. For that reason, it is being rebuild with faster management services and messaging mechanisms that facilitate the evolution and its usage in several environments (some of these service are part of [Mainflux](https://mainflux.readthedocs.io/) platform). In this documentation, the actual version is still referred to as `cloud` and the solution that is under development is referred to as `core`.
+by providing a minimum messaging and management infrastructure. It includes device and authentication management services as well as APIs for sending commands to the things and collect data from their sensors. Also, the KNoT Cloud uses some services from the [Mainflux](https://mainflux.readthedocs.io/) platform, which is a lightweight platform for running IoT cloud computing on the edge. Please, check out the [official documentation](https://knot-devel.cesar.org.br/doc/cloud/cloud-introduction.html) for more information.
 
 ## Installation and usage
 
 Stacks for development and production environments are provided in order to assist the user's needs. The development stack must be used if one needs to modify any of the components of the stack. A command line tool will download the source for each component and plug it into the containers, which all have _hot reload_ enabled. The production stack must be used in all other cases.
-
-### Download
-
-The provided stacks and CLI contained in this repository aren't yet published in any package manager, hence it is necessary that you clone the repository or download the `.zip` containing all the files.
-
-```bash
-git clone https://github.com/CESARBR/knot-cloud.git
-```
-
-The following instructions always assume you are in the directory created after cloning the repository. If you downloaded the `.zip`, navigate to the appropriate folder.
 
 ### Development only preparation
 
@@ -33,21 +21,19 @@ npm install -g @cesarbr/knot-cloud
 
 #### Development
 
-The development stack must be created using the tool described in the previous section. Firstly, inform which `stack` you want to create: `cloud` or `core` (defaults to `cloud`). Lastly, Choose a `<path>` where the stack should be created (defaults to the current directory) and then run:
+The development stack must be created using the tool described in the previous section. Choose a `<path>` where the stack should be created (defaults to the current directory) and then run:
 
 > **_NOTE:_** The following command assumes you don't have a workspace with the repositories and clone them. To disable this, run it with the `--no-clone` flag.
 
 ```bash
-knot-cloud init [stack] [path]
+knot-cloud init [path]
 ```
 
 The source code and stack template files will be created under `<path>/stack`.
 
 #### Production
 
-In the moment, the `cloud` stack is the only with production support. It comes in two flavours: all-in-one and multinode. The former will deploy all the services on a single machine while the latter will deploy them in multiple nodes (at least two). The files for the two flavours are available at `stacks/knot-cloud/prod`.
-
-On the contrary, the `core` stack is currently under development and can be deployed for test purposes. It is organized in a similar way of the `cloud` stack but its definition is structured with multiple compose files, aiming to improve usability. The files are available at `stacks/core`.
+There are two production deployment strategies: all-in-one and multinode. The former will deploy all the services on a single machine while the latter will deploy them in multiple nodes (at least two). The files for the two flavours are available at `stacks/cloud/prod`. The file `multi-node.yml` can be added to the deploy command if you want to enable the multinode strategy.
 
 ### Initialize Swarm mode
 
@@ -64,13 +50,12 @@ In case you are deploying to multiple nodes, all the nodes must be connected to 
 After this point, follow the specific instructions to configure and deploy the created stack:
 
 - [Steps for deploying the cloud services](./stacks/cloud/README.md)
-- [Steps for deploying the core services](./stacks/core/README.md)
 
 ### Tear Down
 
 If you want to stop your stack from running or even leave the Docker Swarm mode, execute the commands below:
 
-`docker stack rm <knot-cloud|knot-cloud-core>`
+`docker stack rm knot-cloud`
 
 and
 
