@@ -1,3 +1,18 @@
+# [4.0.0](https://github.com/CESARBR/knot-cloud/compare/v3.0.0...v4.0.0)
+
+### Features
+
+- Add type parameter to create token command
+- Bump Mainflux services to v0.11.0
+- Add update config
+- Remove legacy Meshblu stack
+- Add demonstration record to documentation
+
+### Bug Fixes
+
+- Add jaeger dependency on authn service
+- Improve stack usage instructions
+
 # [3.0.0](https://github.com/CESARBR/knot-cloud/compare/v2.1.0...v3.0.0)
 
 ### Features
