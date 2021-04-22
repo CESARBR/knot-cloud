@@ -1,6 +1,6 @@
 # knot-cloud
 
-### Configure DNS
+## Configure DNS
 
 This stack uses [Traefik](https://traefik.io) as a reverse proxy for the services and requires that you configure your DNS server to point, at least, the **api** and **storage** subdomains to the machine where the stack is being deployed, so that it can route the requests to the appropriated service. It is possible to configure it to route by path or port, but instructions for that won't be provided here for brevity.
 
@@ -13,11 +13,11 @@ If you don't have a domain or can't configure the main DNS server, you can confi
 
 On Windows, the hosts file is usually located under `c:\Windows\System32\Drivers\etc\hosts`. On Unix systems, it is commonly found at `/etc/hosts`. Regardless of you operating system, administrator or super user privileges will be required.
 
-### Deploy
+## Deploy
 
 The stack uses multiple compose files to setup the services and reach the desired state. Common definitions to both development and production settings are grouped in the `base` directory and specific ones are grouped in the `dev` and `prod` directories. For example, when configuring `traefik` as service's load balancer, you can deploy its development definition to avoid exposing services without need. Also, it can be necessary to deploy the services into multiple machines, which could be done by using the `multi-node` definitions.
 
-#### Development
+### Development
 
 After using the `init` command as described [here](../../README.md#Development), the stack files will be copied to `<path>/stack` directory (`path` is the folder specified in the `init` execution), be sure to enter there. The following files should be shown when exploring the `stack` directory
 
@@ -77,9 +77,9 @@ This stack will be deployed with the basic services, which are related to the th
 
 > **_NOTE:_** [Click here](#verify) and read the instructions to verify if the services are up correctly.
 
-#### Production
+### Production
 
-Firstly, create a new secret to the authenticaton service.
+Firstly, create a new secret to the authentication service.
 
 ```bash
 openssl rand -base64 256
@@ -109,13 +109,13 @@ Example:
 docker stack deploy --compose-file prod/traefik.yml --compose-file base/base.yml --compose-file addons/connector.yml knot-cloud
 ```
 
-The addons can be deployed separetely if the stack is already running:
+The addons can be deployed separately if the stack is already running:
 
 ```bash
 docker stack deploy --compose-file addons/connector.yml knot-cloud
 ```
 
-### Verify
+## Verify
 
 Check if all the services are running and have exactly one replica:
 
@@ -146,7 +146,7 @@ Example:
 docker service logs -f knot-cloud_connector
 ```
 
-### Demonstration
+## Demonstration
 
 If you have had any trouble bringing the services up and creating the user token, watch the following demonstration video:
 
