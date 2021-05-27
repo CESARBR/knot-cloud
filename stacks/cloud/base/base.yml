@@ -3,7 +3,7 @@ version: '3.7'
 services:
   # Mainflux services
   users:
-    image: mainflux/users:0.11.0
+    image: mainflux/users:0.12.1
     env_file: './env.d/mainflux-users.env'
     depends_on:
       - users-db
@@ -11,7 +11,7 @@ services:
       replicas: 1
 
   things:
-    image: mainflux/things:0.11.0
+    image: mainflux/things:0.12.1
     env_file: './env.d/mainflux-things.env'
     depends_on:
       - things-db
@@ -19,11 +19,11 @@ services:
     deploy:
       replicas: 1
 
-  authn:
-    image: mainflux/authn:0.11.0
-    env_file: './env.d/mainflux-authn.env'
+  auth:
+    image: mainflux/auth:0.12.1
+    env_file: './env.d/mainflux-auth.env'
     depends_on:
-      - authn-db
+      - auth-db
       - jaeger
     deploy:
       replicas: 1
@@ -80,11 +80,11 @@ services:
     deploy:
       replicas: 1
 
-  authn-db:
+  auth-db:
     image: postgres:9.6.17-alpine
-    env_file: './env.d/mainflux-authn.env'
+    env_file: './env.d/mainflux-auth.env'
     volumes:
-      - mainflux-authn-db-volume:/var/lib/postgresql/data
+      - mainflux-auth-db-volume:/var/lib/postgresql/data
     deploy:
       replicas: 1
 
@@ -115,6 +115,6 @@ services:
 volumes:
   mainflux-things-db-volume:
   mainflux-users-db-volume:
-  mainflux-authn-db-volume:
+  mainflux-auth-db-volume:
   mongo-data:
   rabbitmq-data:
