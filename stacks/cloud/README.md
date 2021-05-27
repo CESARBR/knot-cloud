@@ -85,7 +85,7 @@ Firstly, create a new secret to the authenticaton service.
 openssl rand -base64 256
 ```
 
-With the generated string, update the `MF_AUTHN_SECRET` environment variable in the `/env.d/mainflux-authn.env` file.
+With the generated string, update the `MF_AUTH_SECRET` environment variable in the `/env.d/mainflux-auth.env` file.
 
 The deployment to production can be done without switching to another directory. It can be done as follows:
 
