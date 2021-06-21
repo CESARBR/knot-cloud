@@ -11,7 +11,7 @@ services:
       placement:
         constraints: [node.role == worker]
 
-  authn:
+  auth:
     deploy:
       placement:
         constraints: [node.role == worker]

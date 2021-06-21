@@ -17,7 +17,7 @@ volumes:
       size: 5
       volumeType: gp2
 
-  mainflux-authn-db-volume:
+  mainflux-auth-db-volume:
     driver: rexray/ebs:latest
     driver_opts:
       size: 5

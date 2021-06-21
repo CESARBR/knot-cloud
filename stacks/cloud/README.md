@@ -193,8 +193,8 @@ Check if all the services are running and have exactly **one** replica (`REPLICA
 ```bash
 $ docker stack services knot-cloud
 ID             NAME                      MODE         REPLICAS   IMAGE                            PORTS
-jpfcfoxy2ai0   knot-cloud_authn          replicated   1/1        mainflux/authn:0.11.0
-2kmk91eo5ci0   knot-cloud_authn-db       replicated   1/1        postgres:9.6.17-alpine
+jpfcfoxy2ai0   knot-cloud_auth          replicated   1/1        mainflux/auth:0.11.0
+2kmk91eo5ci0   knot-cloud_auth-db       replicated   1/1        postgres:9.6.17-alpine
 71bc2h6wlo6d   knot-cloud_babeltower     replicated   1/1        cesarbr/knot-babeltower:dev
 kh88ixwx6qfl   knot-cloud_es-redis       replicated   1/1        redis:5.0-alpine
 678qbux3ypds   knot-cloud_jaeger         replicated   1/1        jaegertracing/all-in-one:1.13
