@@ -17,13 +17,13 @@ services:
         - traefik.http.routers.things.rule=HostRegexp(`{subdomain:things}.{domain:[a-zA-Z0-9.]+}`)
         - traefik.http.routers.things.entrypoints=http
 
-  authn:
+  auth:
    deploy:
       labels:
         - traefik.enable=true
-        - traefik.http.services.authn.loadbalancer.server.port=8183
-        - traefik.http.routers.authn.rule=HostRegexp(`{subdomain:authn}.{domain:[a-zA-Z0-9.]+}`)
-        - traefik.http.routers.authn.entrypoints=http
+        - traefik.http.services.auth.loadbalancer.server.port=8183
+        - traefik.http.routers.auth.rule=HostRegexp(`{subdomain:auth}.{domain:[a-zA-Z0-9.]+}`)
+        - traefik.http.routers.auth.entrypoints=http
 
   storage:
     deploy:
