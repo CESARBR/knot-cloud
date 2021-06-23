@@ -7,12 +7,19 @@ import getFileCredentials from './utils/getFileCredentials';
 
 const subscribe = async (args) => {
   const client = new Client({
-    hostname: args.server,
-    port: args.port,
-    token: args.token,
-    username: args.username,
-    password: args.password,
-    protocol: args.protocol,
+    amqp: {
+      hostname: args.amqpServer,
+      port: args.amqpPort,
+      protocol: args.amqpProtocol,
+      username: args.amqpUsername,
+      password: args.amqpPassword,
+      token: args.token,
+    },
+    http: {
+      hostname: args.httpServer,
+      port: args.httpPort,
+      protocol: args.httpProtocol,
+    },
   });
 
   await client.connect();
@@ -27,7 +34,10 @@ yargs
     command: 'on <event>',
     desc: 'Subscribe to receive events',
     builder: (_yargs) => {
-      _yargs.options(options);
+      _yargs
+        .options(options.amqp)
+        .options(options.http)
+        .options(options.basic);
     },
     handler: async (args) => {
       try {

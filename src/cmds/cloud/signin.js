@@ -5,6 +5,7 @@ import os from 'os';
 import prompt from 'prompt';
 import fse from 'fs-extra';
 import colors from 'colors/safe';
+import options from './utils/options';
 
 const askCredentials = () => {
   prompt.message = '';
@@ -34,8 +35,8 @@ const askCredentials = () => {
 const login = async (config) => {
   const { email, password } = await askCredentials();
   const client = new Authenticator({
-    hostname: config.server,
-    protocol: config.protocol,
+    hostname: config.httpServer,
+    protocol: config.httpProtocol,
   });
 
   try {
@@ -62,18 +63,7 @@ yargs.command({
   desc: 'Sign-in as a user',
   builder: (_yargs) => {
     _yargs
-      .options({
-        server: {
-          describe: 'Server hostname',
-          demandOption: true,
-          default: 'api.knot.cloud',
-        },
-        protocol: {
-          describe: 'Server protocol',
-          demandOption: true,
-          default: 'https',
-        },
-      })
+      .options(options.http)
       .positional('email', {
         describe: "User's e-mail",
         demandOption: true,

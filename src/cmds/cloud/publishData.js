@@ -9,13 +9,21 @@ import getFileCredentials from './utils/getFileCredentials';
 const publishData = async (args) => {
   const data = [{ sensorId: args.sensorId, value: args.value }];
   const client = new Client({
-    hostname: args.server,
-    port: args.port,
-    protocol: args.protocol,
-    username: args.username,
-    password: args.password,
-    token: args.token,
+    amqp: {
+      hostname: args.amqpServer,
+      port: args.amqpPort,
+      protocol: args.amqpProtocol,
+      username: args.amqpUsername,
+      password: args.amqpPassword,
+      token: args.token,
+    },
+    http: {
+      hostname: args.httpServer,
+      port: args.httpPort,
+      protocol: args.httpProtocol,
+    },
   });
+
   await client.connect();
   await client.publishData(args.thingId, data);
   await client.close();
@@ -28,7 +36,9 @@ yargs
     desc: 'Publish <sensor-id> <value> as <thing-id>',
     builder: (_yargs) => {
       _yargs
-        .options(options)
+        .options(options.amqp)
+        .options(options.http)
+        .options(options.basic)
         .positional('sensor-id', {
           describe: 'ID of the sensor that is publishing the data',
         })
