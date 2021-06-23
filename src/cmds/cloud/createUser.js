@@ -2,12 +2,13 @@
 import yargs from 'yargs';
 import chalk from 'chalk';
 import { Authenticator } from '@cesarbr/knot-cloud-sdk-js';
+import options from './utils/options';
 
 const createUser = async (args) => {
   const client = new Authenticator({
-    hostname: args.server,
-    port: args.port,
-    protocol: args.protocol,
+    hostname: args.httpServer,
+    port: args.httpPort,
+    protocol: args.httpProtocol,
   });
 
   try {
@@ -37,18 +38,8 @@ yargs.command({
   command: 'create-user <email> <password>',
   desc: 'Create a new user',
   builder: (_yargs) => {
-    _yargs.options({
-      server: {
-        describe: 'Server hostname',
-        demandOption: true,
-        default: 'api.knot.cloud',
-      },
-      protocol: {
-        describe: 'Server protocol',
-        demandOption: true,
-        default: 'https',
-      },
-    });
+    _yargs
+      .options(options.http);
   },
   handler: async (args) => {
     await createUser(args);

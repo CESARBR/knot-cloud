@@ -21,12 +21,19 @@ const printThings = (devices) => {
 
 const listThings = async (args) => {
   const client = new Client({
-    hostname: args.server,
-    port: args.port,
-    protocol: args.protocol,
-    username: args.username,
-    password: args.password,
-    token: args.token,
+    amqp: {
+      hostname: args.amqpServer,
+      port: args.amqpPort,
+      protocol: args.amqpProtocol,
+      username: args.amqpUsername,
+      password: args.amqpPassword,
+      token: args.token,
+    },
+    http: {
+      hostname: args.httpServer,
+      port: args.httpPort,
+      protocol: args.httpProtocol,
+    },
   });
 
   await client.connect();
@@ -49,7 +56,10 @@ yargs
     command: 'list-things',
     desc: 'List registered things',
     builder: (_yargs) => {
-      _yargs.options(options);
+      _yargs
+        .options(options.amqp)
+        .options(options.http)
+        .options(options.basic);
     },
     handler: async (args) => {
       try {
