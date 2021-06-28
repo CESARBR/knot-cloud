@@ -42,7 +42,13 @@ yargs
         })
         .positional('sensor-id', {
           describe: 'ID of the sensor to request the data',
-        });
+        })
+        .example([
+          [
+            '$0 get-data 0c2958525df5dc3c 0 --amqp-server api.fog --token <user-token>',
+            'Request a new data sample from the sensor `0` of thing `0c2958525df5dc3c`.',
+          ],
+        ]);
     },
     handler: async (args) => {
       try {

@@ -39,7 +39,13 @@ yargs
         .options(options.basic)
         .positional('id', {
           describe: 'Thing ID',
-        });
+        })
+        .example([
+          [
+            '$0 delete-thing 0c2958525df5dc3c --amqp-server api.fog --token <user-token>',
+            'Delete the thing `0c2958525df5dc3c`.',
+          ],
+        ]);
     },
     handler: async (args) => {
       try {

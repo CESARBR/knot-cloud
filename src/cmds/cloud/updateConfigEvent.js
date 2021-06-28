@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, no-multi-str */
 import yargs from 'yargs';
 import fs from 'fs';
 import chalk from 'chalk';
@@ -87,7 +87,15 @@ yargs
           describe: 'send data to the cloud if it is upper than this threshold',
           demandOption: false,
           default: 3000,
-        });
+        })
+        .example([
+          [
+            '$0 update-config-event 9d3b2e867d483c80 0 true 10 3000 4000 \
+            --amqp-server api.fog --token <user-token>',
+            'Update thing `9d3b2e867d483c80` sensor `0` config event with \
+            change=true, timeSec=10, lowerThreshold=3000, upperThreshold=4000',
+          ],
+        ]);
     },
     handler: async (args) => {
       try {

@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, no-multi-str */
 import yargs from 'yargs';
 import chalk from 'chalk';
 import { Authenticator } from '@cesarbr/knot-cloud-sdk-js';
@@ -18,7 +18,17 @@ yargs.command({
   command: 'create-token <email> <credential> <type>',
   desc: 'Create a new user or app token',
   builder: (_yargs) => {
-    _yargs.options(options.http);
+    _yargs.options(options.http).example([
+      [
+        '$0 create-token knot@knot.com strong@password! user --http-server api.fog',
+        'Create a new `user` token for the `knot@knot.com` user.',
+      ],
+      [
+        '$0 create-token knot@knot.com <user-token> app --http-server api.fog',
+        'Create a new `app` token for the `knot@knot.com` user. The \
+        `user` token previously created must by passed as password for creating an `app` token.',
+      ],
+    ]);
   },
   handler: async (args) => {
     try {

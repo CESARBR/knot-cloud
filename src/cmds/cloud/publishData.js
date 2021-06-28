@@ -57,7 +57,13 @@ yargs
 
             return parseFloat(value);
           },
-        });
+        })
+        .example([
+          [
+            '$0 publish-data 0c2958525df5dc3c 0 true --amqp-server api.fog --token <user-token>',
+            'Publish the value `true` as the sensor `0` on behalf of thing `0c2958525df5dc3c`.',
+          ],
+        ]);
     },
     handler: async (args) => {
       try {
