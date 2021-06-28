@@ -39,10 +39,15 @@ const login = async (config) => {
   });
 
   try {
-    const credentials = await client.createToken(email, password);
+    const { token } = await client.createToken(email, password);
+    const appToken = await client.createToken(email, token, 'app');
     const credentialsLocation = `${os.homedir()}/.knot/credentials.json`;
-    fse.outputFileSync(credentialsLocation, JSON.stringify(credentials, null, 2));
-    console.log(colors.cyan(`you have been successfully logged in\ncredentials saved in ${credentialsLocation}`));
+    fse.outputFileSync(credentialsLocation, JSON.stringify(appToken, null, 2));
+    console.log(
+      colors.cyan(
+        `you have been successfully logged in\ncredentials saved in ${credentialsLocation}`
+      )
+    );
   } catch (err) {
     if (err.code === 403) {
       console.log(colors.red('authentication failed, try again'));
@@ -52,34 +57,33 @@ const login = async (config) => {
   }
 };
 
-yargs
-  .command({
-    command: 'login',
-    desc: 'Sign-in as a user',
-    builder: (_yargs) => {
-      _yargs
-        .options({
-          server: {
-            describe: 'Server hostname',
-            demandOption: true,
-            default: 'api.knot.cloud',
-          },
-          protocol: {
-            describe: 'Server protocol',
-            demandOption: true,
-            default: 'https',
-          },
-        })
-        .positional('email', {
-          describe: 'User\'s e-mail',
+yargs.command({
+  command: 'login',
+  desc: 'Sign-in as a user',
+  builder: (_yargs) => {
+    _yargs
+      .options({
+        server: {
+          describe: 'Server hostname',
           demandOption: true,
-        })
-        .positional('password', {
-          describe: 'User\'s password',
+          default: 'api.knot.cloud',
+        },
+        protocol: {
+          describe: 'Server protocol',
           demandOption: true,
-        });
-    },
-    handler: async (args) => {
-      login(args);
-    },
-  });
+          default: 'https',
+        },
+      })
+      .positional('email', {
+        describe: "User's e-mail",
+        demandOption: true,
+      })
+      .positional('password', {
+        describe: "User's password",
+        demandOption: true,
+      });
+  },
+  handler: async (args) => {
+    login(args);
+  },
+});

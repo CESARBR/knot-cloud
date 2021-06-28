@@ -11,7 +11,7 @@ const getFileConfig = (filePath) => {
   const config = JSON.parse(rawData);
   return {
     'sensor-id': config.sensorId,
-    change: config.change,
+    'change': config.change,
     'time-sec': config.timeSec,
     'lower-threshold': config.lowerThreshold,
     'upper-threshold': config.upperThreshold,
@@ -31,7 +31,7 @@ const updateConfigEvent = async (args) => {
   const config = {
     sensorId: args.sensorId,
     event: {
-      change: (args.change === 'true'),
+      change: args.change === 'true',
       timeSec: args.timeSec,
       lowerThreshold: args.lowerThreshold,
       upperThreshold: args.upperThreshold,
@@ -45,10 +45,11 @@ const updateConfigEvent = async (args) => {
 };
 
 yargs
-  .config('credentials-file', path => getFileCredentials(path))
-  .config('event-file', path => getFileConfig(path))
+  .config('credentials-file', (path) => getFileCredentials(path))
+  .config('event-file', (path) => getFileConfig(path))
   .command({
-    command: 'update-config-event <thing-id> <sensor-id> [change] [timeSec] [lowerThreshold] [upperThreshold]',
+    command:
+      'update-config-event <thing-id> <sensor-id> [change] [timeSec] [lowerThreshold] [upperThreshold]',
     desc: 'Update a thing schema',
     builder: (_yargs) => {
       _yargs
@@ -84,7 +85,7 @@ yargs
         await updateConfigEvent(args);
         console.log(chalk.green(`thing ${args.thingId} config updated`));
       } catch (err) {
-        console.log(chalk.red('it was not possible to update the thing\'s config :('));
+        console.log(chalk.red("it was not possible to update the thing's config :("));
         console.log(chalk.red(err));
       }
     },

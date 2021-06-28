@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, no-restricted-globals */
 import yargs from 'yargs';
 import { Client } from '@cesarbr/knot-cloud-sdk-js';
 import isBase64 from 'is-base64';
@@ -22,7 +22,7 @@ const publishData = async (args) => {
 };
 
 yargs
-  .config('credentials-file', path => getFileCredentials(path))
+  .config('credentials-file', (path) => getFileCredentials(path))
   .command({
     command: 'publish-data <thing-id> <sensor-id> <value>',
     desc: 'Publish <sensor-id> <value> as <thing-id>',
@@ -35,9 +35,9 @@ yargs
         .positional('value', {
           describe: 'Value to be published. Supported types: boolean, number or Base64 strings.',
           coerce: (value) => {
-            if (isNaN(value)) { // eslint-disable-line no-restricted-globals
+            if (isNaN(value)) {
               if (value === 'true' || value === 'false') {
-                return (value === 'true');
+                return value === 'true';
               }
               if (!isBase64(value)) {
                 throw new Error('Supported types are boolean, number or Base64 strings');

@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, no-restricted-globals */
 import yargs from 'yargs';
 import chalk from 'chalk';
 import { Client } from '@cesarbr/knot-cloud-sdk-js';
@@ -17,15 +17,17 @@ const setData = async (args) => {
   });
 
   await client.connect();
-  await client.setData(args.thingId, [{
-    sensorId: args.sensorId,
-    value: args.value,
-  }]);
+  await client.setData(args.thingId, [
+    {
+      sensorId: args.sensorId,
+      value: args.value,
+    },
+  ]);
   await client.close();
 };
 
 yargs
-  .config('credentials-file', path => getFileCredentials(path))
+  .config('credentials-file', (path) => getFileCredentials(path))
   .command({
     command: 'set-data <thing-id> <sensor-id> <value>',
     desc: 'Set data to a thing',
@@ -39,11 +41,12 @@ yargs
           describe: 'ID of the sensor to be updated',
         })
         .positional('value', {
-          describe: 'Value to set the sensor to. Supported types: boolean, number or Base64 strings.',
+          describe:
+            'Value to set the sensor to. Supported types: boolean, number or Base64 strings.',
           coerce: (value) => {
-            if (isNaN(value)) { // eslint-disable-line no-restricted-globals
+            if (isNaN(value)) {
               if (value === 'true' || value === 'false') {
-                return (value === 'true');
+                return value === 'true';
               }
               if (!isBase64(value)) {
                 throw new Error('Supported types are boolean, number or Base64 strings');
@@ -60,7 +63,7 @@ yargs
         await setData(args);
         console.log(chalk.green('update data command successfully sent'));
       } catch (err) {
-        console.log(chalk.red('it was not possible to update the thing\'s data :('));
+        console.log(chalk.red("it was not possible to update the thing's data :("));
         console.log(chalk.red(err));
       }
     },

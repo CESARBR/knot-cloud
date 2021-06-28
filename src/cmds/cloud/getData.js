@@ -21,7 +21,7 @@ const getData = async (args) => {
 };
 
 yargs
-  .config('credentials-file', path => getFileCredentials(path))
+  .config('credentials-file', (path) => getFileCredentials(path))
   .command({
     command: 'get-data <thing-id> <sensor-id>',
     desc: 'Requests the current value of <sensor-id> from <thing-id>',

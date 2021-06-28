@@ -40,7 +40,10 @@ const cpDevDir = (basePath) => {
     fs.ensureDirSync(stackDir);
     fs.copySync(`${__dirname}/../../stacks/cloud/dev`, stackDir);
     fs.copySync(`${__dirname}/../../stacks/cloud/base`, stackDir);
-    fs.copyFileSync(`${__dirname}/../../stacks/cloud/addons/connector.dev.yml`, `${stackDir}/connector.yml`);
+    fs.copyFileSync(
+      `${__dirname}/../../stacks/cloud/addons/connector.dev.yml`,
+      `${stackDir}/connector.yml`
+    );
     console.log('Created development stack files');
   } catch (err) {
     const msg = '[Error]:\n\tAn error occurred while copying the development stack files.';
@@ -54,19 +57,14 @@ const cloneRepositories = (initPath, repositories) => {
     const repoName = repo.split('/')[1];
     const repoPath = path.join(initPath, repoName);
     console.log(`Cloning: ${repoName}`);
-    gitClone(
-      `http://github.com/${repo}`,
-      repoPath,
-      { checkout: branch },
-      (err) => {
-        if (err) {
-          const msg = `[Error]:\n\tAn error occured while cloning repository ${repoName}`;
-          handleError(err, msg, logFileMessageRepository);
-          return;
-        }
-        console.log(`Cloned: ${repoName}`);
-      },
-    );
+    gitClone(`http://github.com/${repo}`, repoPath, { checkout: branch }, (err) => {
+      if (err) {
+        const msg = `[Error]:\n\tAn error occured while cloning repository ${repoName}`;
+        handleError(err, msg, logFileMessageRepository);
+        return;
+      }
+      console.log(`Cloned: ${repoName}`);
+    });
   });
 };
 
@@ -89,14 +87,13 @@ yargs // eslint-disable-line import/no-extraneous-dependencies
     command: 'init [path]',
     desc: 'Initialize the stack at [path]',
     builder: (_yargs) => {
-      _yargs
-        .options({
-          clone: {
-            describe: 'Disable cloning repositories',
-            default: true,
-            demandOption: false,
-          },
-        });
+      _yargs.options({
+        clone: {
+          describe: 'Disable cloning repositories',
+          default: true,
+          demandOption: false,
+        },
+      });
     },
     handler: (args) => {
       initStack(args);
