@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, no-multi-str */
 import yargs from 'yargs';
 import { Authenticator } from '@cesarbr/knot-cloud-sdk-js';
 import os from 'os';
@@ -71,7 +71,14 @@ yargs.command({
       .positional('password', {
         describe: "User's password",
         demandOption: true,
-      });
+      })
+      .example([
+        [
+          '$0 login --http-server api.fog',
+          'Login to the KNoT Cloud and create a token that will automatically be imported by the \
+          operations.',
+        ],
+      ]);
   },
   handler: async (args) => {
     login(args);

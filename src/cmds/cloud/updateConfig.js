@@ -50,7 +50,13 @@ yargs
         })
         .options(options.amqp)
         .options(options.http)
-        .options(options.basic);
+        .options(options.basic)
+        .example([
+          [
+            '$0 update-config <path>/config.json --amqp-server api.fog --token $USER_TOKEN',
+            'Update thing `9d3b2e867d483c80` sensor `0` config, which is imported from a JSON file.',
+          ],
+        ]);
     },
     handler: async (args) => {
       try {

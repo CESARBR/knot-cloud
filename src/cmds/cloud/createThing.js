@@ -36,7 +36,13 @@ yargs
       _yargs
         .options(options.amqp)
         .options(options.http)
-        .options(options.basic);
+        .options(options.basic)
+        .example([
+          [
+            '$0 create-thing 0c2958525df5dc3c thing-example --amqp-server api.fog <user-token>',
+            'Create a new thing with id `0c2958525df5dc3c` and name `thing-example`.',
+          ],
+        ]);
     },
     handler: async (args) => {
       try {

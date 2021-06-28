@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, no-multi-str */
 import yargs from 'yargs';
 import fs from 'fs';
 import chalk from 'chalk';
@@ -86,7 +86,15 @@ yargs
           describe: 'Sensor name',
           demandOption: false,
           default: 'Development Thing',
-        });
+        })
+        .example([
+          [
+            '$0 update-config-schema 9d3b2e867d483c80 0 2 0 65521 light-bulb \
+            --amqp-server api.fog --token $USER_TOKEN',
+            'Update thing `9d3b2e867d483c80` sensor `0` config schema with \
+            valueType=2, unit=0, typeId=65521, name=light-bulb',
+          ],
+        ]);
     },
     handler: async (args) => {
       try {

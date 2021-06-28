@@ -39,7 +39,13 @@ yargs.command({
   desc: 'Create a new user',
   builder: (_yargs) => {
     _yargs
-      .options(options.http);
+      .options(options.http)
+      .example([
+        [
+          '$0 create-user knot@knot.com strong@password! --http-server api.fog',
+          'Create a new user with e-mail `knot@knot.com` and password `strong@password!`',
+        ],
+      ]);
   },
   handler: async (args) => {
     await createUser(args);

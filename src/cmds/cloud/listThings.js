@@ -59,7 +59,13 @@ yargs
       _yargs
         .options(options.amqp)
         .options(options.http)
-        .options(options.basic);
+        .options(options.basic)
+        .example([
+          [
+            '$0 list-things --amqp-server api.fog --token <user-token>',
+            'List the registered things.',
+          ],
+        ]);
     },
     handler: async (args) => {
       try {

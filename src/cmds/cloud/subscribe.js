@@ -37,7 +37,8 @@ yargs
       _yargs
         .options(options.amqp)
         .options(options.http)
-        .options(options.basic);
+        .options(options.basic)
+        .example([['$0 on data --http-server api.fog', 'Subscribe for receiving `data` events.']]);
     },
     handler: async (args) => {
       try {

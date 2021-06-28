@@ -65,7 +65,13 @@ yargs
 
             return parseFloat(value);
           },
-        });
+        })
+        .example([
+          [
+            '$0 set-data 0c2958525df5dc3c 0 true --amqp-server api.fog --token <user-token>',
+            'Set a custom value `true` to the sensor `0` of thing `0c2958525df5dc3c`.',
+          ],
+        ]);
     },
     handler: async (args) => {
       try {
