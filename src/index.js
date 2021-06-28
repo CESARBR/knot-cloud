@@ -8,5 +8,4 @@ yargs // eslint-disable-line no-unused-expressions
   .demandCommand()
   .strict()
   .alias('h', 'help')
-  .help()
-  .argv;
+  .help().argv;

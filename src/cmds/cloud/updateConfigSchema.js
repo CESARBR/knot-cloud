@@ -12,9 +12,9 @@ const getFileSchema = (filePath) => {
   return {
     'sensor-id': schema.sensorId,
     'value-type': schema.valueType,
-    unit: schema.unit,
+    'unit': schema.unit,
     'type-id': schema.typeId,
-    name: schema.name,
+    'name': schema.name,
   };
 };
 
@@ -45,8 +45,8 @@ const updateConfigSchema = async (args) => {
 };
 
 yargs
-  .config('credentials-file', path => getFileCredentials(path))
-  .config('schema-file', path => getFileSchema(path))
+  .config('credentials-file', (path) => getFileCredentials(path))
+  .config('schema-file', (path) => getFileSchema(path))
   .command({
     command: 'update-config-schema <thing-id> <sensor-id> [value-type] [unit] [type-id] [name]',
     desc: 'Update a thing schema',
@@ -84,7 +84,7 @@ yargs
         await updateConfigSchema(args);
         console.log(chalk.green(`thing ${args.thingId} schema updated`));
       } catch (err) {
-        console.log(chalk.red('it was not possible to update the thing\'s schema :('));
+        console.log(chalk.red("it was not possible to update the thing's schema :("));
         console.log(chalk.red(err));
       }
     },

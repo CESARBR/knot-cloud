@@ -21,13 +21,12 @@ const createThing = async (args) => {
 };
 
 yargs
-  .config('credentials-file', path => getFileCredentials(path))
+  .config('credentials-file', (path) => getFileCredentials(path))
   .command({
     command: 'create-thing <id> <name>',
-    desc: 'Create a thing',
+    desc: 'Create a new thing',
     builder: (_yargs) => {
-      _yargs
-        .options(options);
+      _yargs.options(options);
     },
     handler: async (args) => {
       try {

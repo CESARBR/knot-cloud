@@ -20,16 +20,14 @@ const deleteThing = async (args) => {
 };
 
 yargs
-  .config('credentials-file', path => getFileCredentials(path))
+  .config('credentials-file', (path) => getFileCredentials(path))
   .command({
     command: 'delete-thing <id>',
     desc: 'Delete thing <id>',
     builder: (_yargs) => {
-      _yargs
-        .options(options)
-        .positional('id', {
-          describe: 'Thing ID',
-        });
+      _yargs.options(options).positional('id', {
+        describe: 'Thing ID',
+      });
     },
     handler: async (args) => {
       try {

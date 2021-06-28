@@ -30,8 +30,7 @@ const updateConfig = async (args) => {
 };
 
 yargs
-  .config('credentials-file', path => getFileCredentials(path))
-  // .config('config-file', path => getFileConfig(path))
+  .config('credentials-file', (path) => getFileCredentials(path))
   .command({
     command: 'update-config <thing-id> <file-path>',
     desc: 'Update a thing configuration from a file',
@@ -49,7 +48,7 @@ yargs
         await updateConfig(args);
         console.log(chalk.green(`thing ${args.thingId} config updated`));
       } catch (err) {
-        console.log(chalk.red('it was not possible to update the thing\'s config :('));
+        console.log(chalk.red("it was not possible to update the thing's config :("));
         console.log(chalk.red(err));
       }
     },

@@ -4,32 +4,32 @@ import getFileCredentials from './getFileCredentials';
 const credentials = getFileCredentials(`${os.homedir()}/.knot/credentials.json`);
 
 export default {
-  server: {
+  'server': {
     describe: 'Server hostname',
     demandOption: true,
     default: 'ws.knot.cloud',
   },
-  port: {
+  'port': {
     describe: 'Server port',
     demandOption: true,
     default: 443,
   },
-  protocol: {
+  'protocol': {
     describe: 'Protocol name',
     demandOption: true,
     default: 'wss',
   },
-  username: {
+  'username': {
     describe: 'RabbitMQ username',
     demandOption: true,
     default: 'knot',
   },
-  password: {
+  'password': {
     describe: 'RabbitMQ password',
     demandOption: true,
     default: 'knot',
   },
-  token: {
+  'token': {
     describe: 'Client token',
     demandOption: true,
     default: credentials.token,

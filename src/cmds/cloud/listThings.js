@@ -1,4 +1,3 @@
-
 /* eslint-disable no-console */
 import yargs from 'yargs';
 import chalk from 'chalk';
@@ -12,7 +11,9 @@ const printThings = (devices) => {
     console.log(`${chalk.green.bold('id')}: ${chalk.blueBright(d.id)}`);
     console.log(`${chalk.green.bold('name')}: ${chalk.blueBright(d.name)}`);
     if (d.config) {
-      console.log(`${chalk.green.bold('config')}: ${chalk.blueBright(JSON.stringify(d.config, null, 2))}`);
+      console.log(
+        `${chalk.green.bold('config')}: ${chalk.blueBright(JSON.stringify(d.config, null, 2))}`
+      );
     }
     console.log('\n');
   });
@@ -43,13 +44,12 @@ const listThings = async (args) => {
 };
 
 yargs
-  .config('credentials-file', path => getFileCredentials(path))
+  .config('credentials-file', (path) => getFileCredentials(path))
   .command({
     command: 'list-things',
     desc: 'List registered things',
     builder: (_yargs) => {
-      _yargs
-        .options(options);
+      _yargs.options(options);
     },
     handler: async (args) => {
       try {

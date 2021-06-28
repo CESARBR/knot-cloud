@@ -21,7 +21,11 @@ const createUser = async (args) => {
     } else {
       console.log(chalk.red('it was not possible to create your user :('));
       if (err.message === '') {
-        console.log(chalk.red('no error message returned, check if user and babeltower services are correctly up'));
+        console.log(
+          chalk.red(
+            'no error message returned, check if user and babeltower services are correctly up'
+          )
+        );
       } else {
         console.log(chalk.red(err));
       }
@@ -29,26 +33,24 @@ const createUser = async (args) => {
   }
 };
 
-yargs
-  .command({
-    command: 'create-user <email> <password>',
-    desc: 'Create a new user',
-    builder: (_yargs) => {
-      _yargs
-        .options({
-          server: {
-            describe: 'Server hostname',
-            demandOption: true,
-            default: 'api.knot.cloud',
-          },
-          protocol: {
-            describe: 'Server protocol',
-            demandOption: true,
-            default: 'https',
-          },
-        });
-    },
-    handler: async (args) => {
-      await createUser(args);
-    },
-  });
+yargs.command({
+  command: 'create-user <email> <password>',
+  desc: 'Create a new user',
+  builder: (_yargs) => {
+    _yargs.options({
+      server: {
+        describe: 'Server hostname',
+        demandOption: true,
+        default: 'api.knot.cloud',
+      },
+      protocol: {
+        describe: 'Server protocol',
+        demandOption: true,
+        default: 'https',
+      },
+    });
+  },
+  handler: async (args) => {
+    await createUser(args);
+  },
+});

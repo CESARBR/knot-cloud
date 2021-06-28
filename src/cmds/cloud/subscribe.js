@@ -22,13 +22,12 @@ const subscribe = async (args) => {
 };
 
 yargs
-  .config('credentials-file', path => getFileCredentials(path))
+  .config('credentials-file', (path) => getFileCredentials(path))
   .command({
     command: 'on <event>',
     desc: 'Subscribe to receive events',
     builder: (_yargs) => {
-      _yargs
-        .options(options);
+      _yargs.options(options);
     },
     handler: async (args) => {
       try {
