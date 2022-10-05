@@ -27,10 +27,18 @@ services:
       - jaeger
     deploy:
       replicas: 1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 100m
+        max-file: 3
 
   # KNoT Fog Core
   babeltower:
-    image: cesarbr/knot-babeltower
+    image: cesarbr/knot-babeltower:KNoTU-v3.1.0-rc05
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
     env_file: './env.d/knot-babeltower.env'
     depends_on:
       - rabbitmq
@@ -38,14 +46,27 @@ services:
       - things
     deploy:
       replicas: 1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 100m
+        max-file: 3
 
   storage:
-    image: cesarbr/knot-cloud-storage
+    image: cesarbr/knot-cloud-storage:KNoTU-v3.1.0-rc05
+    volumes:
+     - "/etc/timezone:/etc/timezone:ro"
+     - "/etc/localtime:/etc/localtime:ro"
     env_file: './env.d/knot-cloud-storage.env'
     depends_on:
       - mongo
     deploy:
       replicas: 1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 100m
+        max-file: 3
 
   # External dependencies: database, tracing, message broker, load balancer.
   things-redis:
@@ -89,7 +110,7 @@ services:
       replicas: 1
 
   rabbitmq:
-    image: rabbitmq
+    image: rabbitmq:3.9.22
     env_file: './env.d/rabbitmq.env'
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
@@ -106,6 +127,8 @@ services:
     image: mongo
     volumes:
       - mongo-data:/data/db
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
     deploy:
       replicas: 1
       resources:

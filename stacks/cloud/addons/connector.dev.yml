@@ -6,7 +6,14 @@ services:
     env_file: './env.d/knot-connector.env'
     volumes:
       - ../knot-fog-connector:/usr/src/app
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
     depends_on:
       - rabbitmq
     deploy:
       replicas: 1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 100m
+        max-file: 3

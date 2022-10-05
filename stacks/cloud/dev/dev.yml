@@ -6,11 +6,21 @@ services:
     image: cesarbr/knot-babeltower:dev
     volumes:
       - ../knot-babeltower:/usr/src/app
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 100m
+        max-file: 3
 
   storage:
     image: cesarbr/knot-cloud-storage:dev
     volumes:
       - ../knot-cloud-storage:/usr/src/app
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 100m
+        max-file: 3
 
   rabbitmq:
-    image: rabbitmq:management
+    image: rabbitmq:3.9.22
