@@ -5,9 +5,9 @@ import path from 'path';
 import yargs from 'yargs';
 
 const KNOT_CLOUD_REPOSITORIES = [
-  'CESARBR/knot-babeltower',
-  'CESARBR/knot-cloud-storage',
-  'CESARBR/knot-fog-connector',
+  'CESARBR/knot-babeltower:KNoTU-v3.1.0-rc05',
+  'CESARBR/knot-cloud-storage:KNoTU-v3.1.0-rc05',
+  'CESARBR/knot-fog-connector:KNOT-v03.00-rc04',
 ];
 
 const KNOT_ERR_FILE = 'knot.err';
