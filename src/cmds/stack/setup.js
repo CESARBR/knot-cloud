@@ -5,8 +5,8 @@ import path from 'path';
 import yargs from 'yargs';
 
 const KNOT_CLOUD_REPOSITORIES = [
-  'CESARBR/knot-babeltower:KNoTU-v3.1.0-rc05',
-  'CESARBR/knot-cloud-storage:KNoTU-v3.1.0-rc05',
+  'CESARBR/knot-babeltower:KNoTU-v3.2.0-rc05',
+  'CESARBR/knot-cloud-storage:KNoTU-v3.1.1-rc05',
   'CESARBR/knot-fog-connector:KNOT-v03.00-rc04',
 ];
 
