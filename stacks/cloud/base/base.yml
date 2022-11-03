@@ -35,7 +35,7 @@ services:
 
   # KNoT Fog Core
   babeltower:
-    image: cesarbr/knot-babeltower:KNoTU-v3.2.0-rc05
+    image: cesarbr/knot-babeltower:KNoTU-v3.2.1-rc05
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
