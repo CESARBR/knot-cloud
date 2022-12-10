@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   connector:
-    image: cesarbr/knot-fog-connector:KNOT-v03.00-rc04
+    image: cesarbr/knot-fog-connector:KNoTU-v3.2.1-rc05
     env_file: './env.d/knot-connector.env'
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
